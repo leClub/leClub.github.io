@@ -8,8 +8,8 @@ leClub.github.io
 
 ## Deploy
 
-  npm run deploy
- 
+    npm run deploy
+
 ## Tutos Metalsmith
 
 * http://blakeembrey.com/articles/2014/09/building-a-blog-with-metalsmith/
