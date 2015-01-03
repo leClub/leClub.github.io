@@ -26,10 +26,6 @@ Metalsmith(__dirname)
             pattern: 'p5lyon/*.md'
         }
     }))
-    .use(permalinks())
-    .use(sass({
-        outputStyle: 'compressed'
-    }))
     .use(markdown({
         gfm: true,
         tables: true,
@@ -44,7 +40,11 @@ Metalsmith(__dirname)
             }
         }
     }))
+    .use(permalinks())
     .use(templates('handlebars'))
+    .use(sass({
+        outputStyle: 'compressed'
+    }))
     .destination('./build')
     .build(function (err) {
         console.log(this._metadata.collections);
