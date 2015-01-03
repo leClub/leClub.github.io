@@ -27,8 +27,9 @@ Metalsmith(__dirname)
         }
     }))
     .use(markdown({
-        gfm: true,
+        gfm: false,
         tables: true,
+	sanitize : false, 
         highlight: function (code, lang) {
             if (!lang) {
                 return code;
