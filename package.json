@@ -1,0 +1,16 @@
+{
+  "name": "leclub-blog",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Le Club blog.",
+  "author": "",
+  "license": ""
+   , "dependencies": {
+        "metalsmith" : "latest",
+        "metalsmith-markdown" : "latest",
+        "metalsmith-templates" : "latest",
+        "metalsmith-collections" : "latest",
+        "metalsmith-permalinks" : "latest",
+        "handlebars" : "latest"
+   }
+}
