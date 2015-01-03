@@ -1,0 +1,16 @@
+{{> header}}
+<h2>{{title}}</h2>
+
+
+<article>
+    <ul>
+        {{#each collections.p5lyon}}
+            <li>
+                <h3><a href="{{this.path}}">{{this.title}}</a></h3>
+            {{ path }}
+            </li>
+        {{/each}}
+    </ul>
+</article>
+
+{{> footer}}

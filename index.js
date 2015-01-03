@@ -1,33 +1,34 @@
 var Metalsmith = require('metalsmith'),
-markdown   = require('metalsmith-markdown'),
-collections = require('metalsmith-collections'),
-permalinks  = require('metalsmith-permalinks'),
-templates  = require('metalsmith-templates'),
-sass = require('metalsmith-sass'),
-handlebars = require('handlebars'),
-highlight  = require('highlight.js'),
-fs = require('fs');
+    markdown   = require('metalsmith-markdown'),
+    collections = require('metalsmith-collections'),
+    permalinks  = require('metalsmith-permalinks'),
+    templates  = require('metalsmith-templates'),
+    sass = require('metalsmith-sass'),
+    handlebars = require('handlebars'),
+    highlight  = require('highlight.js'),
+    fs = require('fs');
 
 handlebars.registerPartial('header', fs.readFileSync(__dirname + '/templates/partials/header.html').toString());
 handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/templates/partials/footer.html').toString());
 
 Metalsmith(__dirname)
-    // .source('src')
+    .source('src')
     .use(collections({
         pages: {
-            pattern: 'src/pages/*.md'
+            pattern: 'pages/*.md'
         },
         posts: {
-            pattern: 'src/posts/*.md',
+            pattern: 'posts/*.md',
             sortBy: 'date',
             reverse: true
+        },
+        p5lyon: {
+            pattern: 'p5lyon/*.md'
         }
     }))
-    .use(permalinks({
-        pattern: ':collection/:title'
-    }))
+    .use(permalinks())
     .use(sass({
-        outputStyle: 'compact'
+        outputStyle: 'compressed'
     }))
     .use(markdown({
         gfm: true,
@@ -46,7 +47,10 @@ Metalsmith(__dirname)
     .use(templates('handlebars'))
     .destination('./build')
     .build(function (err) {
+        console.log(this._metadata.collections);
         if (err) {
           throw err;
+      } else {
+        console.log(this);
       }
   })
