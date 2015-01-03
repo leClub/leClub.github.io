@@ -1,19 +1,16 @@
 leClub.github.io
 ================
 
-# Setup
+## Setup
 
-  npm install 
-  
-# Build
+    npm install 
+    npm run build
 
-  npm run build
-  
-# Deploy
-  
+## Deploy
+
   npm run deploy
-  
-# Tutos
+ 
+## Tutos Metalsmith
 
 * http://blakeembrey.com/articles/2014/09/building-a-blog-with-metalsmith/
 * https://github.com/RobinThrift/metalsmith-tutorial
