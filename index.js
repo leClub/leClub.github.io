@@ -29,7 +29,7 @@ Metalsmith(__dirname)
     .use(markdown({
         gfm: false,
         tables: true,
-	sanitize : false, 
+        sanitize : false,
         highlight: function (code, lang) {
             if (!lang) {
                 return code;
@@ -50,8 +50,8 @@ Metalsmith(__dirname)
     .build(function (err) {
         console.log(this._metadata.collections);
         if (err) {
-          throw err;
-      } else {
-        console.log(this);
-      }
-  })
+            throw err;
+        } else {
+            console.log(this);
+        }
+    })
