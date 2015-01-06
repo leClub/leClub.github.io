@@ -1,5 +1,5 @@
 ---
 template: p5lyon/index.html
-title: "p5 events"
+title: "Processing Lyon"
 ---
-index p5 events
+Processing Lyon

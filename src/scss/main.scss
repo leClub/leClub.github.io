@@ -1,7 +1,27 @@
-body {
-    background: red;
-    h1 {
-        border: 1px solid green;
-    }
+body{
+	background: url("../images/simple_dashed.png");
+	color: #FFF;
+	overflow-x: hidden;
 }
 
+.row{
+	margin-top: 20px;
+}
+
+#header{
+	margin-bottom:20px;
+}
+
+#footer{
+	margin-top: 40px;
+}
+
+hr{
+	margin-top: -15px;
+	margin-bottom: 10px;
+}
+
+.p5Title{
+	color: #FFF;
+	text-decoration: none;
+}

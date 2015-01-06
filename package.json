@@ -10,14 +10,14 @@
     "deploy": "npm run build && cd build && git init . && git add . && git commit -m \"Deploy\"; git push \"git@github.com:leClub/leClub.github.io.git\" master:gh-pages --force && rm -rf .git"
   },
   "dependencies": {
-        "metalsmith" : "latest",
-        "metalsmith-markdown" : "latest",
-        "metalsmith-templates" : "latest",
-        "metalsmith-collections" : "latest",
-        "metalsmith-permalinks" : "latest",
-        "metalsmith-sass" : "latest",
-        "highlight.js" : "latest",
-        "handlebars" : "latest"
-        
-   }
+    "bullhorn-handlebars-helpers": "latest",
+    "handlebars": "latest",
+    "highlight.js": "latest",
+    "metalsmith": "latest",
+    "metalsmith-collections": "latest",
+    "metalsmith-markdown": "latest",
+    "metalsmith-permalinks": "latest",
+    "metalsmith-sass": "latest",
+    "metalsmith-templates": "latest"
+  }
 }
