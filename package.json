@@ -1,0 +1,23 @@
+{
+  "name": "leclub-blog",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Le Club blog.",
+  "author": "",
+  "license": "",
+  "scripts": {
+    "build": "node index.js",
+    "deploy": "npm run build && cd build && git init . && git add . && git commit -m \"Deploy\"; git push \"git@github.com:leClub/leClub.github.io.git\" master:gh-pages --force && rm -rf .git"
+  },
+  "dependencies": {
+    "bullhorn-handlebars-helpers": "latest",
+    "handlebars": "latest",
+    "highlight.js": "latest",
+    "metalsmith": "latest",
+    "metalsmith-collections": "latest",
+    "metalsmith-markdown": "latest",
+    "metalsmith-permalinks": "latest",
+    "metalsmith-sass": "latest",
+    "metalsmith-templates": "latest"
+  }
+}

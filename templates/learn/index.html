@@ -1,0 +1,16 @@
+{{> header}}
+<h2>{{title}}</h2>
+
+{{{ contents }}}
+
+<article>
+    <ul>
+        {{#each collections.learn}}
+            <li>
+                <h3>{{this.title}}</h3>
+            </li>
+        {{/each}}
+    </ul>
+</article>
+
+{{> footer}}
