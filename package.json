@@ -7,7 +7,7 @@
   "license": "",
   "scripts": {
     "build": "node index.js",
-    "deploy": "npm run build && cd build && git init . && git add . && git commit -m \"Deploy\"; git push \"git@github.com:leClub/leClub.github.io.git\" master:gh-pages --force && rm -rf .git"
+    "deploy": "npm run build && cd build && git init . && git add . && git commit -m \"Deploy\"; git push \"git@github.com:leClub/leClub.github.io.git\" master --force && rm -rf .git"
   },
   "dependencies": {
     "bullhorn-handlebars-helpers": "latest",
