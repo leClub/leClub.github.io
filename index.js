@@ -46,6 +46,10 @@ Metalsmith(__dirname)
           url: 'http://leclub.github.io'
         }
       })
+     // .use(define({
+     //    development: true,
+     //    root_path: "//localhost/Dev/clemsos.github.io/build/"
+     //  }))
     .use(collections({
         pages: {
             pattern: 'pages/*.md'
