@@ -1,0 +1,16 @@
+{{> header}}
+
+    <div class="container">
+
+        {{#each collections.posts}}
+            <hr>
+            <article>
+                {{ this.date }}
+                <h2> <a href="/{{this.path}}">{{ this.title }} </a></h2>
+                {{{ this.contents }}}
+            </article>
+        {{/each}}
+
+    </div>
+{{> footer}}
+

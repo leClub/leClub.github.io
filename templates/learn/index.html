@@ -1,16 +1,19 @@
 {{> header}}
-<h2>{{title}}</h2>
+<div class="container">
 
-{{{ contents }}}
+    <h2>{{title}}</h2>
 
-<article>
-    <ul>
-        {{#each collections.learn}}
-            <li>
-                <h3>{{this.title}}</h3>
-            </li>
-        {{/each}}
-    </ul>
-</article>
+    {{{ contents }}}
 
+    <article>
+        <ul>
+            {{#each collections.learn}}
+                <li>
+                    <p><a href="/{{ this.path }}">{{this.title}}</a></p>
+                </li>
+            {{/each}}
+        </ul>
+    </article>
+
+</div>
 {{> footer}}

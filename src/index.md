@@ -1,7 +1,5 @@
 ---
-template: home.html
+template: posts/index.html
 title: Home
-date: 23 février 2062
 ---
 
-# Hello World

@@ -5,10 +5,13 @@ var Metalsmith = require('metalsmith'),
     templates  = require('metalsmith-templates'),
     sass = require('metalsmith-sass'),
     handlebars = require('handlebars'),
+    imagemin = require('metalsmith-imagemin'),
     reverseEach = require( 'bullhorn-handlebars-helpers/src/collection/reverseEach' )( handlebars ),
     highlight  = require('highlight.js'),
+    watch = require('metalsmith-watch'),
     fs = require('fs');
 
+// templating 
 handlebars.registerPartial('header', fs.readFileSync(__dirname + '/templates/partials/header.html').toString());
 handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/templates/partials/footer.html').toString());
 
@@ -37,14 +40,27 @@ handlebars.registerHelper('p5events', function(collection){
 
 Metalsmith(__dirname)
     .source('src')
+    .metadata({
+        site: {
+          title: 'le club',
+          url: 'http://leclub.github.io'
+        }
+      })
     .use(collections({
         pages: {
             pattern: 'pages/*.md'
         },
         posts: {
-            pattern: 'posts/*.md',
+            pattern: 'posts/*/*.md',
             sortBy: 'date',
-            reverse: true
+            reverse: true,
+            metadata: {
+                name: 'Posts',
+                description: 'List of posts'
+            }
+        },
+        learn: {
+            pattern: 'learn/*/*.md'
         },
         p5lyonEvents: {
             pattern: 'p5lyon/events/*.md'
@@ -65,6 +81,10 @@ Metalsmith(__dirname)
             }
         }
     }))
+    // .use(imagemin({
+    //     optimizationLevel: 3,
+    //     svgoPlugins: [{ removeViewBox: false }]
+    //   }))
     .use(permalinks())
     .use(templates('handlebars'))
     .use(sass({
@@ -72,7 +92,7 @@ Metalsmith(__dirname)
     }))
     .destination('./build')
     .build(function (err) {
-        console.log(this._metadata.collections);
+        // console.log(this._metadata.collections);
         if (err) {
             throw err;
         } else {

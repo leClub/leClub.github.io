@@ -1,5 +1,5 @@
 ---
 template: learn/single.html
-title: "Processing 101"
+title: "Web Tangible"
 author: Le Club
 ---

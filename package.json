@@ -18,6 +18,9 @@
     "metalsmith-markdown": "latest",
     "metalsmith-permalinks": "latest",
     "metalsmith-sass": "latest",
-    "metalsmith-templates": "latest"
+    "metalsmith-convert": "git://github.com/clemsos/metalsmith-convert",
+    "metalsmith-templates": "latest",
+    "metalsmith-watch": "latest",
+    "metalsmith-imagemin": "^1.1.0"
   }
 }
