@@ -3,18 +3,33 @@ layout: index
 title: Home
 ---
 
-# Le Club
+#### Dataviz
 
-<div class="row">
-  <div class="six columns">
-    <p>
-      Les ateliers Processing Lyon sont des ateliers ouverts au public autour de la pratique du code créatif encadrés par Lionel Radisson, Clément Renaud et Clément Ribé.
-    </p>
-  </div>
-  <div class="six columns">
-    <p>
-      Email: <a href="mailto:processing.lyon@gmail.com">processing.lyon@gmail.com</a><br>
-      Twitter: <a href="http://twitter.com/p5lyon">@P5Lyon</a>
-    </p>
-  </div>
-</div>
+* Intro à D3js
+* Datavisualisation with D3js
+
+#### JS
+
+* JS for Graphic Designers
+* Intro à NodeJS
+* Realtime webapps with socket.io  ou MeteorJS
+
+#### Makers
+
+* Intro à Arduino
+* Arduino Sensorshield
+* Web Tangible
+* Getting started with Raspberry Pi
+* Intro Python
+
+#### 3D
+
+* Intro Grasshopper (avec Sam Javelle)
+* Grasshopper Advanced ( Gh + Processing / Gh +Arduino )
+
+#### Processing
+
+* Intro à Processing
+* Processing for Graphic Designers
+* Processing Advanced ( 3d, libs )
+* Processing Masterclass (dataviz, arduino + p5, p5.js, ... )

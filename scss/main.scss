@@ -88,13 +88,21 @@ code {
     }
 }
 
-#past {
+#workshops-list {
 	list-style: none;
 	h6 {
 		margin-bottom: 0;
 	}
-	li {
-		max-height: 150px;
-		overflow: hidden
+	li{
+		&.upcoming {
+			border: 1px solid $grey-color;
+			padding: 5px;
+			
+		}
+
+		&.past {
+			max-height: 150px;
+			overflow: hidden
+		}
 	}
 }
