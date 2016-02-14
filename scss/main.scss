@@ -8,34 +8,29 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 
+$text-color: #FFF;
+$link-color : steelblue;
+$link-color-hover : green;
+
+
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
+	"typo",
 	"header",
 	"footer"
 	;
 
 body{
 	background: url("../images/simple_dashed.png");
-	color: #FFF;
 	overflow-x: hidden;
 }
+
 
 img {
 	max-width: 100%;
 }
 
-h1 small {
-	color: $grey-color;
-	font-size: .6em;
-}
-
-.row{
-	margin-top: 20px;
-}
-
-#header{
-	margin-bottom:20px;
-}
 
 #footer{
 	margin-top: 40px;
@@ -59,11 +54,6 @@ hr{
 	text-decoration: none;
 }
 
-
-
-a {
-	text-decoration: none;
-}
 
 code {
 	color: #F9F4F4;
@@ -97,7 +87,7 @@ code {
 		&.upcoming {
 			border: 1px solid $grey-color;
 			padding: 5px;
-			
+
 		}
 
 		&.past {
