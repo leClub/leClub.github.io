@@ -1,0 +1,21 @@
+title: "Le Club"
+tagline: "Workshops"
+permalink: /:year/:month/:title/
+future: true
+
+tagline : "Creative coding & Workshops"
+description: "Le Club is a group of professionals that delivers workshops & services for making and creative coding. We are based in Lyon, France."
+
+keywords: ['creative coding', 'data visualization', 'installation', 'network analysis']
+
+# sns
+github: leclub
+email: "processing.lyon@gmail.com"
+twitter: P5Lyon
+
+# build settings
+encoding: utf-8
+exclude: [README.md, LICENSE, CNAME]
+
+sass:
+  sass_dir: scss

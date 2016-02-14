@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+{% include visual/headerP5.html %}
+<div class="container" id="main">
+  {% for post in site.categories %}
+    {{ categories }}
+  {% endfor %}
+
+  {% assign curDate = site.time | date: '%s' %}
+  {% assign secondsInMonth = 2629746 %}
+
+  <div class="eight columns">
+  {% for post in site.posts %}
+    {% assign postStartDate = post.date | date: '%s' %}
+    {% if postStartDate >= curDate %}
+      <article>
+          {{ post.date | date: '%B %d, %Y' }}
+          <h2> <a href="{{ post.url }}">{{ post.title }} </a></h2>
+          <img src="/images/{{ post.image }}" alt="{{ post.title }}">
+          {{ post.content }}
+      </article>
+    {% endif %}
+  {% endfor %}
+  </div>
+  <div class="four columns">
+
+    <ul id="categories" class="u-cf">
+      {% for category in site.categories %}
+        <li class="category">
+          <p>{{ category | first }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <h3>Past Workshops</h3>
+    <ul>
+      {% for post in site.posts %}
+        {% assign postStartDate = post.date | date: '%s' %}
+        {% if postStartDate <= curDate   %}
+          <li>{{ post.date | date: '%B %d, %Y' }} - <a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

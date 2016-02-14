@@ -1,0 +1,89 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import
+	"header",
+	"footer"
+	;
+
+body{
+	background: url("../images/simple_dashed.png");
+	color: #FFF;
+	overflow-x: hidden;
+}
+
+img {
+	max-width: 100%;
+}
+
+h1 small {
+	color: $grey-color;
+	font-size: .6em;
+}
+
+.row{
+	margin-top: 20px;
+}
+
+#header{
+	margin-bottom:20px;
+}
+
+#footer{
+	margin-top: 40px;
+}
+
+#categories {
+	list-style: none;
+	li {
+		float:left;
+		padding: 5px;
+	}
+}
+
+hr{
+	margin-top: -15px;
+	margin-bottom: 10px;
+}
+
+.p5Title{
+	color: #FFF;
+	text-decoration: none;
+}
+
+
+
+a {
+	text-decoration: none;
+}
+
+code {
+	color: #F9F4F4;
+	background: #4F4F4F;
+	border: 1px solid #797575;
+}
+
+/**
+ * Icons
+ */
+.icon {
+
+    > svg {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+
+        path {
+            fill: $grey-color;
+        }
+    }
+}

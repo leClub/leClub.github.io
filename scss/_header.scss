@@ -1,0 +1,25 @@
+#branding {
+	h3 a {
+		color: #FFF;
+		text-decoration: none;
+	}
+}
+
+#nav {
+    margin: 13px 0 0 0;
+
+	ul li {
+	    display: inline;
+	    margin: 0 20px 0 0;
+	    margin-bottom: 130px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #FFF;
+		text-decoration: underline;
+	}
+}
