@@ -2,6 +2,7 @@
 layout: post
 title: Meme Machine
 image: DuangMachine.png
+location: Mirage Festival
 categories: [ "dataviz", "js", "d3js" ]
 ---
 
