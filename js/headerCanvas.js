@@ -2,8 +2,8 @@
 	var canvas = d.getElementById("headerCanvas");
 	var ctx = canvas.getContext("2d");
 	var width = window.innerWidth;
-	var height = 300;
-	var nbParticles = 4000;
+	var height = 150;
+	var nbParticles = 1500;
 	var p = [];
 	var X, Y, frameCount = 0;
 
