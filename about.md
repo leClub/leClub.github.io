@@ -1,7 +1,6 @@
 ---
+layout: page
 title: Home
-template: page.html
-
 ---
 
 # About
