@@ -25,7 +25,6 @@ layout: default
   {% endfor %}
   </div>
   <div class="four columns">
-
     <ul id="categories" class="u-cf">
       {% for category in site.categories %}
         <li class="category">
@@ -33,13 +32,20 @@ layout: default
         </li>
       {% endfor %}
     </ul>
-
-    <h3>Past Workshops</h3>
-    <ul>
+    <ul id="past" class="past workshops">
       {% for post in site.posts %}
         {% assign postStartDate = post.date | date: '%s' %}
         {% if postStartDate <= curDate   %}
-          <li>{{ post.date | date: '%B %d, %Y' }} - <a href="{{ post.url }}">{{ post.title }}</a></li>
+
+          <li>
+            <h6>
+              {{ post.title }}
+              {% if post.desc %}| <span>{{ post.desc }}</span>{% endif %}
+            </h6>
+            <a href="{{ post.url }}" title="{{ post.title }}">
+              <img src="/images/{{ post.image }}" alt="{{ post.title }}">
+            </a>
+          </li>
         {% endif %}
       {% endfor %}
     </ul>

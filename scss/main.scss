@@ -87,3 +87,14 @@ code {
         }
     }
 }
+
+#past {
+	list-style: none;
+	h6 {
+		margin-bottom: 0;
+	}
+	li {
+		max-height: 150px;
+		overflow: hidden
+	}
+}
