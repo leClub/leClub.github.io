@@ -1,6 +1,6 @@
 (function(d,w,u){
-	var canvas = d.getElementById("headerCanvas");
-	var ctx = canvas.getContext("2d");
+	var canvas = d.getElementById('headerCanvas');
+	var ctx = canvas.getContext('2d');
 	var width = window.innerWidth;
 	var height = 150;
 	var nbParticles = 1500;
@@ -55,15 +55,16 @@
 		canvas.width = width;
 		canvas.height = height;
 
-		// ctx.fillStyle = "#111111";
-		ctx.fillStyle = "#111111";
+		// ctx.fillStyle = '#111111';
+		ctx.fillStyle = '#111111';
 		ctx.fillRect(0, 0, width, height);
 
 		X = int(random(50, width-50));
 		Y = int(random(50, 950));
 
 		for (var i=0; i<nbParticles; i++) p.push( new Particle(i/5000.0, Math.random()*width, Math.random()*height));
-		color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+		// color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+		color = 'hsb(' + ~~( Math.random() * 360 ) + ', 80%, 1. )' ;
 	}
 
 	function animate() {
@@ -73,8 +74,8 @@
 			Y = int(random(50, 950));
 		}
 
-		ctx.fillStyle = "rgba(0,0,0, 0.056)";
-		ctx.strokeStyle = "#000";
+		ctx.fillStyle = 'rgba(0,0,0, 0.056)';
+		ctx.strokeStyle = '#000';
 		ctx.fillRect(0, 0, width, height);
 
 
