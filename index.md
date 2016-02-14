@@ -5,4 +5,6 @@ title: Home
 
 ##### {{ site.description }}
 
-{% include workshops_list.html %}
+{% include workshops/list.html %}
+
+{% include ad.html %}

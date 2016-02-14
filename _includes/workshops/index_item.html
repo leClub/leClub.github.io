@@ -1,6 +1,3 @@
-<ul>
-{% for workshop in site.workshops | exclude 'Home' %}
-
 <li>
   <a href="{{workshop.url}}" title="{{ workshop.title }}">
     {{ workshop.title }}
@@ -16,6 +13,3 @@
       {% endfor %}
   {% endif %}
 </li>
-
-{% endfor %}
-</ul>
