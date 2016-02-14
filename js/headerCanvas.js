@@ -50,6 +50,7 @@
 	}
 
 	// Main
+	var color;
 	function init() {
 		canvas.width = width;
 		canvas.height = height;
@@ -62,6 +63,7 @@
 		Y = int(random(50, 950));
 
 		for (var i=0; i<nbParticles; i++) p.push( new Particle(i/5000.0, Math.random()*width, Math.random()*height));
+		color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 	}
 
 	function animate() {
@@ -75,8 +77,9 @@
 		ctx.strokeStyle = "#000";
 		ctx.fillRect(0, 0, width, height);
 
-		ctx.strokeStyle = "#f012be";
-		ctx.fillStyle = "#f012be";
+
+		ctx.strokeStyle = color;
+		ctx.fillStyle = color;
 		for (var i=0; i<nbParticles; i++) p[i].display();
 
 		window.requestAnimationFrame(animate);
