@@ -18,3 +18,9 @@ h1 small, h2 small, h3 small, h4 small {
 	color: $grey-color;
 	font-size: .6em;
 }
+
+.button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
+    color: #FFF;
+    background-color: $btn-color;
+    border-color: $btn-color;
+}

@@ -12,6 +12,7 @@ $text-color: #FFF;
 $link-color : steelblue;
 $link-color-hover : green;
 
+$btn-color: steelblue;
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)
@@ -95,4 +96,8 @@ code {
 			overflow: hidden
 		}
 	}
+}
+
+#ad {
+	text-align: center;
 }
