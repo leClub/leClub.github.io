@@ -3,8 +3,7 @@ layout: page
 title: Home
 ---
 
-##### {{ site.tagline }}
-{{ site.description }}
+##### {{ site.description }}
 
 #### Dataviz
 

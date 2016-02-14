@@ -4,7 +4,7 @@ permalink: /:year/:month/:title/
 future: true
 
 tagline : "Learn, code, create"
-description: "Le Club is a group of professionals that delivers workshops & services for making and creative coding. We are based in Lyon, France."
+description: "Le Club delivers workshops & services for making and creative coding."
 
 keywords: ['creative coding', 'data visualization', 'installation', 'network analysis']
 
