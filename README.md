@@ -1,19 +1,11 @@
 leClub.github.io
 ================
 
-## Setup
+Official websites for [Le Club](http://leclub.github.io)
 
-    npm install 
-    npm run build
+Written in Jekyll
 
-## Deploy
-
-    npm run deploy
-
-## Tutos Metalsmith
-
-* http://blakeembrey.com/articles/2014/09/building-a-blog-with-metalsmith/
-* https://github.com/RobinThrift/metalsmith-tutorial
+    Jekyll server # on port 4000 
 
 ## Refs for Markdown, HandleBars and Skeleton
 
