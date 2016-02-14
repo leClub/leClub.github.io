@@ -1,24 +1,19 @@
-
-
-<ul class="row">
-<div class="six columns">
+<div class="row">
 {% for workshop in site.workshops %}
-  {% assign half = forloop.length | divided_by: 2 %}
-  {% assign modulo = forloop.length | modulo: 2 %}
-  {% assign remainder = half | plus: modulo %}
-  {% if forloop.rindex >= remainder %}
-    {% include workshops/index_item.html workshop=workshop %}
+  {% assign first_third = forloop.length | divided_by: 3 %}
+  {% assign next_third_start = forloop.length | divided_by: 3 | plus: 1 %}
+  {% assign next_third_end = forloop.length | divided_by: 3 | times: 2 %}
+  {% assign last_third_start = forloop.length | divided_by: 3 | times: 2 | plus: 1%}
+
+  {% if forloop.first or forloop.index == next_third_start or forloop.index == last_third_start %}
+    <ul class="four columns">
   {% endif %}
+
+    {% include workshops/index_item.html workshop=workshop %}
+
+  {% if forloop.index == first_third or forloop.index == next_third_end or forloop.last %}
+    </ul>
+  {% endif %}
+
 {% endfor %}
 </div>
-
-<div class="six columns">
-{% for workshop in site.workshops %}
-  {% assign half = forloop.length | divided_by: 2 %}
-  {% if forloop.rindex <= half %}
-    {% include workshops/index_item.html workshop=workshop %}
-  {% endif %}
-{% endfor %}
-</div>
-
-</ul>
