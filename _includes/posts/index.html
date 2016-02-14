@@ -5,11 +5,11 @@
   {% assign postStartDate = post.date | date: '%s' %}
   {% if postStartDate >= curDate %}
     <li class="upcoming">
-      {{ post.date | date: '%B %d, %Y' }}
-      <h4>{{ post.title }}</h4>
       <a href="{{ post.url }}">
         <img src="/images/{{ post.image }}" alt="{{ post.desc }}">
       </a>
+      <h4>{{ post.title }}</h4>
+      {{ post.date | date: '%B %d, %Y' }}
     </li>
   {% endif %}
 {% endfor %}

@@ -45,6 +45,10 @@ img {
 	}
 }
 
+#headerCanvas {
+	margin: .5em auto 1em auto;
+}
+
 hr{
 	margin-top: -15px;
 	margin-bottom: 10px;
@@ -79,15 +83,19 @@ code {
     }
 }
 
+
 .workshops {
+
 	list-style: none;
+	text-align: center;
+
 	h4, h6 {
 		margin-bottom: 0;
 	}
 	li{
 		display: inline-block;
-
 		&.upcoming {
+
 			width: 30%;
 			// border: 1px solid $grey-color;
 			padding: 5px;
@@ -103,5 +111,10 @@ code {
 }
 
 #ad {
+	text-align: center;
+	margin: 1em auto 3em auto;
+}
+
+.home-desc {
 	text-align: center;
 }

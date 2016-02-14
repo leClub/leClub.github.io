@@ -4,12 +4,16 @@
   </a>
 
   {% if workshop.desc %}<br>{{workshop.desc}}{% endif %}
-  {% if workshop.level %} ({{workshop.level}}) {% endif %}
 
   {% if workshop.categories %}
-    <br><b>Tech</b> :
+    <br>
+    <b>
       {% for cat in workshop.categories %}
-        {{ cat }} /
+        {{ cat }}
+        {% if forloop.last == false %}, {% endif %}
       {% endfor %}
+    </b>
   {% endif %}
+
+  {% if workshop.level %}<br> {{workshop.level}} {% endif %}
 </li>
