@@ -3,6 +3,9 @@ layout: page
 title: Home
 ---
 
+##### {{ site.tagline }}
+{{ site.description }}
+
 #### Dataviz
 
 * Intro à D3js
