@@ -65,7 +65,6 @@
 		for (var i=0; i<nbParticles; i++) p.push( new Particle(i/5000.0, Math.random()*width, Math.random()*height));
 		// color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 		color = 'hsl(' + (~~( Math.random() * 360 )) + ', 80%, 50% )' ;
-		console.log('color: '+ color);
 	}
 
 	function animate() {
