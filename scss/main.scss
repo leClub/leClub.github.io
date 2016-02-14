@@ -84,7 +84,7 @@ code {
 }
 
 #workshops-desc {
-	margin-top: 2em;	
+	margin-top: 2em;
 }
 
 .workshops {
@@ -120,4 +120,35 @@ code {
 
 .home-desc {
 	text-align: center;
+}
+
+
+$blurb-img-size:100px;
+
+#team {
+	margin-top: 2em;
+	text-align: center;
+
+	.blurb {
+	  margin-bottom: 1em;
+
+	  img{
+	    max-height:$blurb-img-size;
+	    max-width:$blurb-img-size;
+	  }
+
+		canvas {
+			 -webkit-filter:invert(100%);
+			 filter: invert(1);
+			 filter:progid:DXImageTransform.Microsoft.BasicImage(invert='1');
+	 }
+	}
+}
+
+.circular {
+	width: $blurb-img-size;
+	height: $blurb-img-size;;
+  border-radius: $blurb-img-size;
+  -webkit-border-radius: $blurb-img-size;
+  -moz-border-radius: $blurb-img-size;
 }

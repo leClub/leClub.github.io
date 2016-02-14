@@ -8,3 +8,4 @@ title: Home
 {% include ad.html %}
 
 {% include posts/index.html %}
+{% include team.html %}
