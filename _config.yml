@@ -4,7 +4,7 @@ permalink: /:year/:month/:title/
 future: true
 
 tagline : "Learn, code, create"
-description: "Le Club delivers workshops & services for making and creative coding."
+description: "Le Club delivers training, workshops and support for creative projects."
 
 keywords: ['creative coding', 'data visualization', 'installation', 'network analysis']
 
