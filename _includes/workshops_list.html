@@ -1,0 +1,21 @@
+<ul>
+{% for workshop in site.workshops | exclude 'Home' %}
+
+<li>
+  <a href="{{workshop.url}}" title="{{ workshop.title }}">
+    {{ workshop.title }}
+  </a>
+
+  {% if workshop.desc %}<br>{{workshop.desc}}{% endif %}
+  {% if workshop.level %} ({{workshop.level}}) {% endif %}
+
+  {% if workshop.categories %}
+    <br><b>Tech</b> :
+      {% for cat in workshop.categories %}
+        {{ cat }} /
+      {% endfor %}
+  {% endif %}
+</li>
+
+{% endfor %}
+</ul>

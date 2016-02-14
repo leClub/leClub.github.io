@@ -19,3 +19,7 @@ exclude: [README.md, LICENSE, CNAME]
 
 sass:
   sass_dir: scss
+
+collections:
+    workshops :
+        output: true

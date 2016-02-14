@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<h1>{{page.title}}
+  {% if page.desc %}<small>{{page.desc}}</small>{% endif %}
+</h1>
+
+<ul class="workshop-info">
+{% if page.level %}
+  <li><b>Level</b>  {{page.level}}</li>
+{% endif %}
+{% if page.categories %}
+  <li><b>Tech</b> :
+    {% for cat in page.categories %}
+      {{ cat }} /
+    {% endfor %}
+  </li>
+{% endif %}
+{% if page.link %}
+  <li><b>Link</b> : <a href="{{page.link}}">{{page.link}}</a></li>
+{% endif %}
+</ul>
+
+{{ content }}
