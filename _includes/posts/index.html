@@ -1,0 +1,32 @@
+{% assign curDate = site.time | date: '%s' %}
+
+<ul id="workshops-upcoming" class="workshops">
+{% for post in site.posts %}
+  {% assign postStartDate = post.date | date: '%s' %}
+  {% if postStartDate >= curDate %}
+    <li class="upcoming">
+      {{ post.date | date: '%B %d, %Y' }}
+      <h4>{{ post.title }}</h4>
+      <a href="{{ post.url }}">
+        <img src="/images/{{ post.image }}" alt="{{ post.desc }}">
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>
+
+<ul id="workshops-past" class="workshops">
+  {% for post in site.posts %}
+    {% assign postStartDate = post.date | date: '%s' %}
+    {% if postStartDate <= curDate %}
+    <li class="past">
+      <h6>
+        {{ post.title }}
+      </h6>
+      <a href="{{ post.url }}" title="{{ post.desc }}">
+        <img src="/images/{{ post.image }}" alt="{{ post.title }}">
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>

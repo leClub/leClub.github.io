@@ -79,20 +79,24 @@ code {
     }
 }
 
-#workshops-list {
+.workshops {
 	list-style: none;
-	h6 {
+	h4, h6 {
 		margin-bottom: 0;
 	}
 	li{
+		display: inline-block;
+
 		&.upcoming {
-			border: 1px solid $grey-color;
+			width: 30%;
+			// border: 1px solid $grey-color;
 			padding: 5px;
 
 		}
 
 		&.past {
-			max-height: 150px;
+			width: 150px;
+			max-height: 120px;
 			overflow: hidden
 		}
 	}

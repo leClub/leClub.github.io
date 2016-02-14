@@ -4,13 +4,9 @@
 {% include visual/headerP5.html %}
 
 <div class="container" id="main">
-  <div class="eight columns">
-    {{ content }}
-  </div>
+  {{ content }}
 
-  <div class="four columns">
-    {% include sidebar.html %}
-  </div>
+  {% include posts/index.html %}
 </div>
 
 {% include footer.html %}
