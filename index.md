@@ -1,11 +1,4 @@
 ---
-layout: page
+layout: home
 title: Home
 ---
-
-{% include workshops/list.html %}
-
-{% include ad.html %}
-
-{% include posts/index.html %}
-{% include team.html %}
