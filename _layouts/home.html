@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Le Club</title>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 	<style>
 		* {
 			margin: 0;
@@ -13,6 +15,7 @@
 		body {
 			display: flex;
 			flex-direction: column;
+			background-color: #1E2630;
 		}
 		#cnvs {
 			position: absolute;
@@ -22,26 +25,44 @@
 			height: 100%;
 		}
 		svg {
+			z-index: 1;
 			margin: auto;
 			max-width: 80%;
 			max-height: 80%;
-			-webkit-filter: drop-shadow(17px 5px 10px rgba(0, 0, 0, 0.8));
-			filter: url(shadow.svg#drop-shadow);
+		}
+		#footer{
+			text-align: right;
+			z-index: 1;
+			margin: 20px 40px;
+		}
+		#footer > a{
+			margin-left: 10px;
+			color:white;
+			font-size: 30px;
 		}
 	</style>
+
 </head>
 
 <body>
 	<canvas id="cnvs"></canvas>
 
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="433px" height="500px" viewBox="0 0 433 500" enable-background="new 0 0 433 500" xml:space="preserve">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="433px" height="560px" viewBox="0 0 433 560" enable-background="new 0 0 433 560" xml:space="preserve">
+
+		<defs>
+			<filter id="f2" x="0" y="0" width="200%" height="200%">
+				<feOffset result="offOut" in="SourceAlpha" dx="20" dy="20" />
+				<feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+				<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+			</filter>
+		</defs>
 		<g>
-			<polygon fill="#202B38" points="-0.006,125 216.499,0 433.007,125 433.007,375.001 216.499,500 -0.006,375.001 " />
+			<polygon fill="#202B38" points="-0.006,125 216.499,0 433.007,125 433.007,375.001 216.499,500 -0.006,375.001" filter="url(#f2)" />
 			<polygon fill="#3B444E" points="61.221,208.057 12.439,246.612 12.439,253.389 61.221,291.943 61.221,280.161 23.055,250.001 
-		  61.221,219.839 " />
+		  61.221,219.839" />
 			<polygon fill="#3B444E" points="371.783,291.943 420.565,253.389 420.565,246.612 371.783,208.057 371.783,219.839 
-		  409.949,250.001 371.783,280.161 " />
-			<polygon fill="#3B444E" points="356.943,127.755 76.056,385.798 76.056,372.246 356.943,114.203 " />
+		  409.949,250.001 371.783,280.161" />
+			<polygon fill="#3B444E" points="356.943,127.755 76.056,385.798 76.056,372.246 356.943,114.203" />
 			<g>
 				<g>
 					<path fill="#FFFFFF" d="M77.701,294.349h9.618v1.362H76.098v-19.447h1.603V294.349z" />
@@ -124,134 +145,136 @@
 		</g>
 	</svg>
 
+	<div id="footer">
+		<a href="http://github.com/leClub" target="_blank"><i class="fa fa-github fa-fw"></i></a>
+		<a href="http://twitter.com/__leClub" target="_blank"><i class="fa fa-twitter fa-fw"></i></a>
+		<a href="mailto:contact@leclub.io" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+	</div>
+
 	<script>
-		(function(window, document, undefined) {
-			var cnvs = document.querySelector('#cnvs'),
-				ctx = cnvs.getContext('2d'),
-				width, height;
+	(function(window, document, undefined) {
+		var cnvs = document.querySelector('#cnvs'),
+			ctx = cnvs.getContext('2d'),
+			width, height;
 
-			function setDimensions() {
-				width = window.innerWidth;
-				height = window.innerHeight;
+		function setDimensions() {
+			width = window.innerWidth;
+			height = window.innerHeight;
 
-				document.body.style.height = height + 'px';
+			document.body.style.height = height + 'px';
 
-				cnvs.width = width;
-				cnvs.height = height;
+			cnvs.width = width;
+			cnvs.height = height;
+		}
+		setDimensions();
+
+		function randInt(max) {
+			return ~~(Math.random() * max);
+		}
+
+		function clamp(val, min, max) {
+			return val < min ? min : val > max ? max : val;
+		}
+
+		var Grid = function(args) {
+			this.width = args.width || null;
+			this.height = args.height || null;
+			this.nbX = args.nbX || ~~(args.width / args.moduleWidth) + 1;
+			this.nbY = args.nbY || ~~(args.height / args.moduleHeight) + 1;
+			this.moduleWidth = args.moduleWidth || ~~(args.width / args.nbX);
+			this.moduleHeight = args.moduleHeight || ~~(args.height / args.nbY);
+
+			this.width = this.moduleWidth * this.nbX;
+			this.height = this.moduleHeight * this.nbY;
+
+			this.patterns = [];
+		};
+
+		Grid.prototype.populate = function(Types) {
+			this.patterns = [];
+			for (var j = 0; j < this.nbY; j++) {
+				var line = [];
+				for (var i = 0; i < this.nbX; i++) {
+					line.push(new Types[randInt(Types.length)]());
+				}
+				this.patterns.push(line);
 			}
+		};
+
+		Grid.prototype.display = function(x, y) {
+			ctx.save();
+			ctx.translate(x, y);
+
+			for (var j = 0; j < this.nbY; j++) {
+				for (var i = 0; i < this.nbX; i++) {
+					this.drawPattern(i, j);
+				}
+			}
+
+			ctx.restore();
+		};
+
+		Grid.prototype.drawPattern = function(i, j) {
+			ctx.save();
+			ctx.translate(i * this.moduleWidth, j * this.moduleHeight);
+			var pattern = this.patterns[j][i];
+			pattern.draw(this.moduleWidth, this.moduleHeight);
+			ctx.restore();
+		};
+
+		var grid = new Grid({
+			width: width,
+			height: height,
+			moduleWidth: 50,
+			moduleHeight: 50
+		});
+
+		var Pattern = function() {
+			this.r = Math.random() < .5;
+
+			this.update = function() {
+				this.r = Math.random() < .5;
+			};
+
+			this.draw = function(w, h) {
+				var s = 10;
+
+				//ctx.fillStyle = '#252d36';
+				ctx.fillStyle = '#FB3550';
+
+				ctx.beginPath();
+				ctx.moveTo(this.r ? -s : w + s, 0);
+				ctx.lineTo(this.r ? 0 : w, -s);
+				ctx.lineTo(this.r ? w + s : -s, h);
+				ctx.lineTo(this.r ? w : 0, h + s);
+				ctx.closePath();
+				ctx.fill();
+			};
+		};
+
+		grid.populate([Pattern]);
+
+		function draw() {
+			window.requestAnimationFrame(draw);
+			grid.patterns[randInt(grid.nbY)][randInt(grid.nbX)].update();
+			ctx.fillStyle = '#1E2630';
+			ctx.fillRect(0, 0, width, height);
+			grid.display((width - grid.width) / 2, (height - grid.height) / 2);
+			ctx.fillStyle = 'rgba(30,38,48,0.6)';
+			ctx.fillRect(0, 0, width, height);
+		}
+		draw();
+
+		window.addEventListener('resize', function() {
 			setDimensions();
 
-			function randInt(max) {
-				return~~ (Math.random() * max);
-			}
-
-			function clamp(val, min, max) {
-				return val < min ? min : val > max ? max : val;
-			}
-
-			var Grid = function(args) {
-				this.width = args.width || null;
-				this.height = args.height || null;
-				this.nbX = args.nbX || ~~(args.width / args.moduleWidth) + 1;
-				this.nbY = args.nbY || ~~(args.height / args.moduleHeight) + 1;
-				this.moduleWidth = args.moduleWidth || ~~(args.width / args.nbX);
-				this.moduleHeight = args.moduleHeight || ~~(args.height / args.nbY);
-
-				this.width = this.moduleWidth * this.nbX;
-				this.height = this.moduleHeight * this.nbY;
-
-				this.patterns = [];
-			};
-
-			Grid.prototype.populate = function(Types) {
-				for (var j = 0; j < this.nbY; j++) {
-					var line = [];
-					for (var i = 0; i < this.nbX; i++) {
-						line.push(new Types[randInt(Types.length)]());
-					}
-					this.patterns.push(line);
-				}
-			};
-
-			Grid.prototype.display = function(x, y) {
-				ctx.save();
-				ctx.translate(x, y);
-
-				for (var j = 0; j < this.nbY; j++) {
-					for (var i = 0; i < this.nbX; i++) {
-						this.drawPattern(i, j);
-					}
-				}
-
-				ctx.restore();
-			};
-
-			Grid.prototype.drawPattern = function(i, j) {
-				ctx.save();
-				ctx.translate(i * this.moduleWidth, j * this.moduleHeight);
-				var pattern = this.patterns[j][i];
-				pattern.draw(this.moduleWidth, this.moduleHeight);
-				ctx.restore();
-			};
-
-			var grid = new Grid({
-				width: width,
-				height: height,
-				moduleWidth: 50,
-				moduleHeight: 50
-			});
-
-			var Pattern = function() {
-				this.r = Math.random() < .5;
-
-				this.update = function() {
-					this.r = Math.random() < .5;
-				};
-
-				this.draw = function(w, h) {
-					var s = 10;
-
-					//ctx.fillStyle = '#252d36';
-					ctx.fillStyle = '#FB3550';
-
-					ctx.beginPath();
-					ctx.moveTo(this.r ? -s : w + s, 0);
-					ctx.lineTo(this.r ? 0 : w, -s);
-					ctx.lineTo(this.r ? w + s : -s, h);
-					ctx.lineTo(this.r ? w : 0, h + s);
-					ctx.closePath();
-					ctx.fill();
-				};
-			};
-
+			grid.nbX =  ~~(width / grid.moduleWidth) + 1;
+			grid.width = grid.nbX * grid.moduleWidth;
+			grid.nbY =  ~~(height / grid.moduleHeight) + 1;
+			grid.height = grid.nbY * grid.moduleHeight;
 			grid.populate([Pattern]);
-
-			function draw() {
-				ctx.fillStyle = '#1E2630';
-				ctx.fillRect(0, 0, width, height);
-				grid.display((width - grid.width) / 2, (height - grid.height) / 2);
-			}
-			draw();
-
-			window.setInterval(function() {
-				grid.patterns[randInt(grid.nbY)][randInt(grid.nbX)].update();
-				draw();
-			}, 100);
-
-			window.addEventListener('resize', function() {
-				setDimensions();
-
-				grid.nbX = ~~ (width / grid.moduleWidth) + 1;
-				grid.width = grid.nbX * grid.moduleWidth;
-
-				grid.nbY = ~~ (height / grid.moduleHeight) + 1;
-				grid.height = grid.nbY * grid.moduleHeight;
-
-				grid.populate([Pattern]);
-
-				draw();
-			});
-		})(window, document, undefined);
+		});
+	})(window, document, undefined);
 	</script>
 </body>
 
