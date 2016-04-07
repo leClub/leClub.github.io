@@ -3,7 +3,7 @@ tagline: "Workshops"
 permalink: /:year/:month/:title/
 future: true
 
-tagline : "Learn, code, create"
+tagline : "Learn. Code. Create."
 description: "Le Club delivers training, workshops and support for creative projects."
 
 keywords: ['creative coding', 'data visualization', 'installation', 'network analysis']
@@ -11,7 +11,7 @@ keywords: ['creative coding', 'data visualization', 'installation', 'network ana
 # sns
 github: leclub
 email: "contact@leclub.io"
-twitter: P5Lyon
+twitter: __leClub
 
 # build settings
 encoding: utf-8
@@ -19,7 +19,3 @@ exclude: [README.md, LICENSE, CNAME]
 
 sass:
   sass_dir: scss
-
-collections:
-    workshops :
-        output: true

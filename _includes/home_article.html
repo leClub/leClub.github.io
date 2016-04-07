@@ -1,0 +1,47 @@
+{% if include.type == 0 or include.type == 1 %}
+<div class="col">
+{% endif %}
+
+    {% if include.type == 0 %}
+    <article class="big">
+    {% else %}
+    <article>
+    {% endif %}
+        <a href="{{ site.posts[include.index].url }}">
+            <div class="content">
+                <div class="bg" style='background-image: url("/images/{{ site.posts[include.index].image }}");'></div>
+                <h3 class="title">
+                    {{ site.posts[include.index].title }}
+
+                    {% assign nbCategories = site.posts[include.index].categories.size | minus:1 %}
+
+                    {% comment %}
+                    {% if nbCategories != 0 %}
+                    <br><small>
+                        {{ nbCategories }}
+                    </small>
+                    {% endif %}
+                    {% endcomment %}
+
+                    {% if nbCategories >= 0 %}
+                        <br><small>
+                        {% for c in (0..nbCategories) %}
+                            {% if site.posts[include.index].categories[c] == 'big' %}
+                                {% continue %}
+                            {% endif %}
+
+                            {{ site.posts[include.index].categories[c] }}
+                            {% if c < nbCategories - 1 %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                        </small>
+                    {% endif %}
+                </h3>
+            </div>
+        </a>
+    </article>
+
+{% if include.type == 0 or include.type == 2 %}
+</div>
+{% endif %}

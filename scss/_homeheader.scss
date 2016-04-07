@@ -1,0 +1,30 @@
+#home_header {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    #cnvs {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    svg {
+        z-index: 1;
+        margin: auto;
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    #links {
+        text-align: right;
+        z-index: 1;
+        margin: 20px 40px;
+        
+        a {
+            margin-left: 10px;
+            color: white;
+            font-size: 30px;
+        }
+    }
+}

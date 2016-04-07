@@ -3,7 +3,7 @@ layout: post
 title: Meme Machine
 image: DuangMachine.png
 location: Mirage Festival
-categories: [ "dataviz", "js", "d3js" ]
+categories: [ dataviz, js, d3js ]
 ---
 
 Meme Machine est destiné à ceux qui désirent apprendre à développer des applications créatives utilisables dans un navigateur Web. Les débutants sont les bienvenus.

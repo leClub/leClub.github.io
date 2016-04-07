@@ -3,152 +3,22 @@
 ---
 @charset "utf-8";
 
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-
-
-$text-color: #FFF;
-$link-color : steelblue;
-$link-color-hover : green;
-
-$btn-color: steelblue;
-
-
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
-	"typo",
-	"header",
-	"footer"
-	;
+    "reset",
+    "fonts",
+    "homeheader",
+    "homegrid",
+    "post",
+    "footer";
 
-body{
-	background: url("../images/simple_dashed.png");
-	overflow-x: hidden;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-
-img {
-	max-width: 100%;
+body {
+    background: #121212;
+    overflow-x: hidden;
 }
 
-
-#footer{
-	margin-top: 40px;
-}
-
-#categories {
-	list-style: none;
-	li {
-		float:left;
-		padding: 5px;
-	}
-}
-
-#headerCanvas {
-	margin: .5em auto 1em auto;
-}
-
-hr{
-	margin-top: -15px;
-	margin-bottom: 10px;
-}
-
-.p5Title{
-	color: #FFF;
-	text-decoration: none;
-}
-
-
-code {
-	color: #F9F4F4;
-	background: #4F4F4F;
-	border: 1px solid #797575;
-}
-
-/**
- * Icons
- */
-.icon {
-
-    > svg {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        vertical-align: middle;
-
-        path {
-            fill: $grey-color;
-        }
-    }
-}
-
-#workshops-desc {
-	margin-top: 2em;
-}
-
-.workshops {
-
-	list-style: none;
-	text-align: center;
-
-	h4, h6 {
-		margin-bottom: 0;
-	}
-	li{
-		display: inline-block;
-		&.upcoming {
-
-			width: 30%;
-			// border: 1px solid $grey-color;
-			padding: 5px;
-
-		}
-
-		&.past {
-			width: 150px;
-			max-height: 120px;
-			overflow: hidden
-		}
-	}
-}
-
-#ad {
-	text-align: center;
-	margin: 1em auto 3em auto;
-}
-
-.home-desc {
-	text-align: center;
-}
-
-
-$blurb-img-size:100px;
-
-#team {
-	margin-top: 2em;
-	text-align: center;
-
-	.blurb {
-	  margin-bottom: 1em;
-
-	  img{
-	    max-height:$blurb-img-size;
-	    max-width:$blurb-img-size;
-	  }
-
-		canvas {
-			 -webkit-filter:invert(100%);
-			 filter: invert(1);
-			 filter:progid:DXImageTransform.Microsoft.BasicImage(invert='1');
-	 }
-	}
-}
-
-.circular {
-	width: $blurb-img-size;
-	height: $blurb-img-size;;
-  border-radius: $blurb-img-size;
-  -webkit-border-radius: $blurb-img-size;
-  -moz-border-radius: $blurb-img-size;
-}
