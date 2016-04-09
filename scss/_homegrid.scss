@@ -1,30 +1,49 @@
 
-#home_grid {
-    // background: white;
+$col_padding: 2px;
+$col_big_minwidth: 500px;
+$col_minwidth: $col_big_minwidth / 2;
+$article_big_height: 400px;
+$article_height: $article_big_height / 2 - $col_padding;
+
+$article_backgroundcolor: #FFF;
+$title_color: #000;
+$small_color: #aa9;
+
+@mixin bg-margin($margin){
+    margin-left: $margin;
+    margin-top: $margin;
+    width: calc(100% - #{$margin * 2});
+    height: calc(100% - #{$margin * 2});
+}
+
+@mixin transition($time){
+    transition: all $time linear;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#grid {
     margin: 0 auto;
-    // max-width: 1800px;
     display: flex;
     flex-flow: row wrap;
 
     .col {
         flex-grow: 1;
-        min-width: 250px;
-        padding: 2px;
+        min-width: $col_minwidth;
+        padding: $col_padding;
 
         article {
-            background: #fff;
-            height: 198px;
-            background: black;
+            height: $article_height;
 
             .content {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                background: black;
                 width: 100%;
                 height: 100%;
                 position: relative;
                 overflow: hidden;
+                background: darken($article_backgroundcolor, 80%);
+                @include transition(.5s);
 
                 .bg {
                     position: absolute;
@@ -32,51 +51,39 @@
                     left: 0;
                     background-size: cover;
                     background-position: center center;
-                    // opacity: 0.7;
-                    margin-left: 15px;
-                    margin-top: 15px;
-                    width: calc(100% - 30px);
-                    height: calc(100% - 30px);
-                    transition: all .2s linear;
-                    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+                    @include bg-margin(4px);
+                    @include transition(.2s);
                 }
 
                 .title {
                     position: absolute;
-                    bottom: -200%;
-                    // bottom: 0%;
+                    bottom: 150%;
                     left: 0;
-                    right: 0;
-                    // background: rgba(255,255,255,.85);
-                    background: black;
                     padding: 20px;
-                    transition: all .2s linear;
-                    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-                    color: white;
+                    background: darken($article_backgroundcolor, 80%);
+                    color: $title_color;
                     vertical-align: baseline;
                     font-family: sans-serif;
                     font-size: 16px;
-                    // font-weight: bold;
                     font-weight: normal;
                     text-transform: uppercase;
+                    @include transition(.2s);
                     
                     small{
                         font-weight: normal;
                         font-size: 12px;
-                        color: #aa9;
+                        color: $small_color;
                     }
                 }
 
                 &:hover {
-                    .bg {
-                        margin-left: 4px;
-                        margin-top: 4px;
-                        width: calc(100% - 8px);
-                        height: calc(100% - 8px);
-                        opacity: 1;
+                    background: $article_backgroundcolor;
+                    .bg{
+                        @include bg-margin(15px);
                     }
 
-                    .title {
+                    .title{
+                        background: $article_backgroundcolor;
                         bottom: 10%;
                     }
                 }
@@ -84,22 +91,18 @@
         }
 
         article:nth-child(2) {
-            margin-top: 4px;
+            margin-top: $col_padding * 2;
         }
 
         .big {
-            height: 400px;
-            min-width: 500px;
+            height: $article_big_height;
+            min-width: $col_big_minwidth;
         }
-    }
-    
-    &:hover .bg {
-        opacity: 0.5;
     }
 }
 
-@media all and (max-width: 429px) {
-    article, .big {
-        min-width: 100%;
+@media all and (max-width: 529px) {
+    article {
+        min-width: 200px !important;
     }
 }

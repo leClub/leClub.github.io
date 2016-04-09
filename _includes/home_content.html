@@ -1,4 +1,4 @@
-<div id="home_grid">
+<div id="grid">
     {% capture nbPosts %}{{ site.posts.size | minus:1 }}{% endcapture %}
     {% assign inColumn = false %}
 
@@ -21,3 +21,5 @@
 
     {% endfor %}
 </div>
+
+<script src="/js/grid.js"></script>
