@@ -1,11 +1,13 @@
-footer{
+header{
     margin: 20px 2px;
     padding: 10px;
-    border-top: solid 3px #FB3550;
+    border-bottom: solid 3px #FB3550;
 
-    p{
+    h1{
         color: #FB3550;
         font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-        text-align: right;
+        text-align: left;
+        font-size: 20px;
+        font-weight: 800;
     }
 }

@@ -2,24 +2,36 @@
 layout: default
 ---
 <article class="post">
-    <h1>{{ page.title }}</h1>
+    <h1 class="title">
+        {{ page.title }}
+
+        {% assign nbCategories = page.categories.size | minus:1 %}
+
+        {% comment %}
+        {% if nbCategories != 0 %}
+        <br><small>
+            {{ nbCategories }}
+        </small>
+        {% endif %}
+        {% endcomment %}
+
+        {% if nbCategories >= 0 %}
+            <br><small>
+            {% for c in (0..nbCategories) %}
+                {% if page.categories[c] == 'big' %}
+                    {% continue %}
+                {% endif %}
+
+                {{ page.categories[c] }}
+                {% if c < nbCategories - 1 %}
+                    ,
+                {% endif %}
+            {% endfor %}
+            </small>
+        {% endif %}
+    </h1>
+
     <hr>
+
     {{ content }}
 </article>
-
-<!-- Dependencies -->
-{% for dependency in page.deps %}
-    <script src="{{ dependency }}"></script>
-{% endfor %}
-
-<!-- run code -->
-<script>
-    (function(){
-        eval( document.getElementById("code").textContent );
-    })();
-</script>
-
-<!-- Highlight.js -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/monokai-sublime.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>

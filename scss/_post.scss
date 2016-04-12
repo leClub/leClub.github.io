@@ -2,6 +2,23 @@
     max-width: 1200px;
     margin: auto;
     text-align: center;
+    
+    h1{
+        text-align: left;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: uppercase;
+
+        small{
+            font-size: 12px;
+            font-weight: 200;
+        }
+    }
+
+    hr{
+        margin: 20px 0;
+    }
 
     canvas, svg{
         margin: auto;
@@ -9,7 +26,7 @@
     }
 
     pre {
-        margin: 5px;
+        margin: 20px 0;
 
         white-space: pre-wrap;       /* css-3 */
         white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */

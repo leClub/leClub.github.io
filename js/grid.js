@@ -2,12 +2,12 @@
     var grid = document.querySelector('#grid');
     
     function isOnScreen(elem) {
-        var viewport_top = document.body.scrollTop;
+        var viewport_top = document.body.scrollTop > document.documentElement.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;
         var viewport_height = window.innerHeight;
         var viewport_bottom = viewport_top + viewport_height;
         var top = elem.offsetTop;
-        var height = parseInt(elem.parentNode.style.height);
-        var bottom = top + height;
+        // var height = parseInt(elem.parentNode.style.height);
+        // var bottom = top + height;
         return top < viewport_bottom;
             /*(top >= viewport_top && top < viewport_bottom)
             || (bottom > viewport_top && bottom <= viewport_bottom) 

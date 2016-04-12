@@ -1,0 +1,22 @@
+---
+layout: post
+---
+<div id="code">
+{{ content }}
+<!-- Dependencies -->
+{% for dependency in page.deps %}<script src="{{ dependency }}"></script>
+{% endfor %}
+</div>
+
+<!-- show code -->
+<pre><code id="viewCode"></code></pre>
+<script>
+    (function(){
+        document.getElementById('viewCode').textContent = document.getElementById('code').innerHTML;
+    })();
+</script>
+
+<!-- Highlight.js -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/monokai-sublime.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>

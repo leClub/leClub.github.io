@@ -79,7 +79,7 @@ $small_color: #aa9;
                 &:hover {
                     background: $article_backgroundcolor;
                     .bg{
-                        @include bg-margin(15px);
+                        @include bg-margin(10px);
                     }
 
                     .title{
