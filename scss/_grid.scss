@@ -65,9 +65,14 @@ $small_color: #aa9;
                     vertical-align: baseline;
                     font-family: sans-serif;
                     font-size: 16px;
-                    font-weight: normal;
+                    font-weight: bold;
                     text-transform: uppercase;
                     @include transition(.2s);
+                  
+                    a{
+                        color: $title_color;
+                        text-decoration: none;
+                    }
                     
                     small{
                         font-weight: normal;

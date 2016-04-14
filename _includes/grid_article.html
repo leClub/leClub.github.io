@@ -8,39 +8,37 @@
     <article>
     {% endif %}
     
-        <a href="{{ site.posts[include.index].url }}">
-            <div class="content">
-                <div class="bg" style='background-image: url("/images/previews/{{ site.posts[include.index].image }}");'></div>
-                <h3 class="title">
-                    {{ site.posts[include.index].title }}
+        <div class="content">
+            <a href="{{ site.posts[include.index].url }}"><div class="bg" style='background-image: url("/images/previews/{{ site.posts[include.index].image }}");'></div></a>
+            <h3 class="title">
+                <a href="{{ site.posts[include.index].url }}">{{ site.posts[include.index].title }}</a>
 
-                    {% assign nbCategories = site.posts[include.index].categories.size | minus:1 %}
+                {% assign nbCategories = site.posts[include.index].categories.size | minus:1 %}
 
-                    {% comment %}
-                    {% if nbCategories != 0 %}
+                {% comment %}
+                {% if nbCategories != 0 %}
+                <br><small>
+                    {{ nbCategories }}
+                </small>
+                {% endif %}
+                {% endcomment %}
+
+                {% if nbCategories >= 0 %}
                     <br><small>
-                        {{ nbCategories }}
+                    {% for c in (0..nbCategories) %}
+                        {% if site.posts[include.index].categories[c] == 'big' %}
+                            {% continue %}
+                        {% endif %}
+
+                        <a href="#">{{ site.posts[include.index].categories[c] }}</a>
+                        {% if c < nbCategories - 1 %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
                     </small>
-                    {% endif %}
-                    {% endcomment %}
-
-                    {% if nbCategories >= 0 %}
-                        <br><small>
-                        {% for c in (0..nbCategories) %}
-                            {% if site.posts[include.index].categories[c] == 'big' %}
-                                {% continue %}
-                            {% endif %}
-
-                            {{ site.posts[include.index].categories[c] }}
-                            {% if c < nbCategories - 1 %}
-                                ,
-                            {% endif %}
-                        {% endfor %}
-                        </small>
-                    {% endif %}
-                </h3>
-            </div>
-        </a>
+                {% endif %}
+            </h3>
+        </div>
     </article>
 
 {% if include.type == 0 or include.type == 2 %}
