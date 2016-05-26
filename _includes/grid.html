@@ -2,23 +2,18 @@
     {% capture nbPosts %}{{ include.collection.size | minus:1 }}{% endcapture %}
     {% assign inColumn = false %}
 
-    {% comment %} Make it look like we have lots of posts with for loop {% endcomment %}
-    {% for j in (0..2) %} 
-
-        {% for i in (0..nbPosts) %}
-            {% if inColumn == false %}
-                {% if include.collection[i].categories contains 'big' %}
-                    {% include grid_article.html index=i type=0 %}
-                {% else %}
-                    {% include grid_article.html index=i type=1 %}
-                    {% assign inColumn = true %}
-                {% endif %}
+    {% for i in (0..nbPosts) %}
+        {% if inColumn == false %}
+            {% if include.collection[i].categories contains 'big' %}
+                {% include grid_article.html index=i type=0 nPosts=nbPosts %}
             {% else %}
-                {% include grid_article.html index=i type=2 %}
-                {% assign inColumn = false %}
+                {% include grid_article.html index=i type=1 nPosts=nbPosts %}
+                {% assign inColumn = true %}
             {% endif %}
-        {% endfor %}
-
+        {% else %}
+            {% include grid_article.html index=i type=2 nPosts=nbPosts %}
+            {% assign inColumn = false %}
+        {% endif %}
     {% endfor %}
 </div>
 

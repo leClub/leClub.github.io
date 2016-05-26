@@ -1,11 +1,6 @@
 title: "Le Club"
-tagline: "Workshops"
-permalink: /:year/:month/:title/
-future: true
-
 tagline : "Learn. Code. Create."
 description: "Le Club delivers training, workshops and support for creative projects."
-
 keywords: ['creative coding', 'data visualization', 'installation', 'network analysis']
 
 # sns
@@ -14,8 +9,13 @@ email: "contact@leclub.io"
 twitter: __leClub
 
 # build settings
+permalink: /:year/:month/:title/
+future: true
 encoding: utf-8
+
 exclude: [README.md, LICENSE, CNAME]
+include: [.htaccess]
+show_drafts: false
 
 sass:
   sass_dir: scss

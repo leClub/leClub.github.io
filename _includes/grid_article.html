@@ -1,13 +1,27 @@
-{% if include.type == 0 or include.type == 1 %}
+{% capture index %} 
+{{ include.index | abs }}
+{% endcapture %}
+
+{% capture nPosts %} 
+{{ include.nPosts | abs }}
+{% endcapture %}
+
+{% assign lastArticle  = false %}
+{% if index == nPosts %}
+{% assign lastArticle  = true %}
+{% endif %}
+
+
+{% assign type = include.type %}
+{% if lastArticle == true and type == 1 %}
+{% assign type = 0 %}
+{% endif %}
+
+{% if type == 0 or type == 1 %}
 <div class="col">
 {% endif %}
 
-    {% if include.type == 0 %}
-    <article class="big">
-    {% else %}
-    <article>
-    {% endif %}
-    
+    <article  {% if type == 0 %}class="big"{% endif %}>
         <div class="content">
             <a href="{{ site.posts[include.index].url }}"><div class="bg" style='background-image: url("/images/previews/{{ site.posts[include.index].image }}");'></div></a>
             <h3 class="title">
@@ -41,6 +55,6 @@
         </div>
     </article>
 
-{% if include.type == 0 or include.type == 2 %}
+{% if type == 0 or type == 2 or lastArticle == true %}
 </div>
 {% endif %}

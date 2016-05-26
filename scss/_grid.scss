@@ -1,4 +1,3 @@
-
 $col_padding: 2px;
 $col_big_minwidth: 500px;
 $col_minwidth: $col_big_minwidth / 2;
@@ -49,7 +48,7 @@ $small_color: #aa9;
                     position: absolute;
                     top: 0;
                     left: 0;
-                    background-size: cover;
+                    // background-size: cover;
                     background-position: center center;
                     @include bg-margin(4px);
                     @include transition(.2s);

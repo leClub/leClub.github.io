@@ -3,9 +3,9 @@ layout: post
 ---
 <div id="code">
 {{ content }}
-<!-- Dependencies -->
+{% if page.deps | size  != 0 %}<!-- Dependencies -->
 {% for dependency in page.deps %}<script src="{{ dependency }}"></script>
-{% endfor %}
+{% endfor %}{% endif %}
 </div>
 
 <!-- show code -->
