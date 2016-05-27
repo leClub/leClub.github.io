@@ -1,13 +1,18 @@
-header{
-    margin: 20px 2px;
-    padding: 10px;
-    border-bottom: solid 3px #FB3550;
+a{
+    text-decoration: none;
+    
+    header{
+        margin: 20px 2px;
+        padding: 10px;
+        border-bottom: solid 3px #FB3550;
 
-    h1{
-        color: #FB3550;
-        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-        text-align: left;
-        font-size: 20px;
-        font-weight: 800;
+        h1{
+            text-decoration: none !important;
+            color: #FB3550;
+            font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 800;
+        }
     }
 }

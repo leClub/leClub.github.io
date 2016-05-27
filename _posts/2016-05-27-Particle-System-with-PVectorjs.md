@@ -1,16 +1,10 @@
 ---
 layout: code
-title: Particle System with PVectorjs
+title: FlowField and Particle System with PVectorjs
 image: Particle-System-with-PVectorjs.png
 categories: [ js, canvas, pvectorjs ]
 deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js', 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.min.js' ]
 ---
-<style>
-    canvas{
-        background:#000;
-    }
-</style>
-
 <canvas id="cnvs"></canvas>
 
 <script>
@@ -106,7 +100,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         };
 
         ParticleSystem.prototype.run = function(field) {
-            context.strokeStyle = 'rgba(255,255,255,0.5)';
+            context.strokeStyle = 'rgba(255,255,255,0.2)';
             this.particles.forEach(function(p){
                 p.applyForce( field.getForce( p.loc ) );
                 p.update();
@@ -171,7 +165,6 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         };
 
         function setup(){
-            context.strokeStyle = 'black';
 
             simplex = new SimplexNoise();
             flowfield = new FlowField(50,50,40);
@@ -179,17 +172,22 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
             frame = 0;
 
             flowfield.update(frame);
+
+            context.fillStyle = 'rgba( 15, 15, 33, 1 )';
+            context.fillRect(0,0,width,height);
+
             animate();
         }
 
         function animate(){
             window.requestAnimationFrame(animate);
             
-            context.fillStyle = '#121233';
+            // context.fillStyle = '#121233';
+            context.fillStyle = 'rgba( 15, 15, 33, .1 )';
             context.fillRect(0,0,width,height);
 
-            flowfield.update(frame/600);
-            flowfield.display();
+            flowfield.update(frame/300);
+            // flowfield.display();
 
             particleSystem.run(flowfield);
 
