@@ -21,10 +21,10 @@ deps: []
 
         function send(){
           var xhr = new XMLHttpRequest();
-          var url = 'https://maker.ifttt.com/trigger/sendMail/with/key/dau0arAyhXHT9qrHmqdAXS';
+          var url = 'https://maker.ifttt.com/trigger/sendMail/with/key/YourKey';
           
           //params
-          var dest = 'makio135@gmail.com';
+          var dest = 'mail@mail.com';
           var msg = 'Yo Spam!';
           var signature = 'Yo!';
           var params = 'value1=' + dest + '&value2=' + msg + '&value3=' + signature;
