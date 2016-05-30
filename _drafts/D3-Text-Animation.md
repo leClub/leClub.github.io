@@ -109,7 +109,7 @@ deps: [ 'https://d3js.org/d3.v3.min.js', 'https://cdn.rawgit.com/riccardoscalco/
                     height: 0,
                     y: h / 2
                 } )
-                .each( 'end', bars );
+                .each( 'end', animBars );
 
             d3.select( '#pattern' )
                 .select( 'path' )
@@ -120,7 +120,7 @@ deps: [ 'https://d3js.org/d3.v3.min.js', 'https://cdn.rawgit.com/riccardoscalco/
                 .attr( 'stroke-width', 30 );
         }
 
-        function bars(){
+        function animBars(){
             var margin = 50;
             var space = 10;
             var barWidth = 30;
@@ -247,6 +247,44 @@ deps: [ 'https://d3js.org/d3.v3.min.js', 'https://cdn.rawgit.com/riccardoscalco/
             }
 
             createElements();
+        }
+
+        function animArcs(){
+			var data = [];
+			for(var position = 0; position < longueur - 20; position += data[data.length - 1].size ){
+				var size = 10 + Math.random() * 50;
+				
+				if( position + size > longueur ) size = longueur - position;
+				
+				data. push( {
+					size: size,
+					x: position + size / 2,
+					upper: Math.random() < 0.5
+				} );
+			}
+
+			var data2 = [], index = 0;
+			for( var i = 0; i < data.length - 1; i ++ ){
+				if( data[ i ].upper == data[ i + 1 ].upper ){
+					if( data2[ index ] ){
+						data2[ index ].size += data[ i + 1 ].size;
+					}
+					else{
+						var size = data[ i ].size + data[ i + 1 ].size;
+						data2.push( {
+							size: size,
+							x: data[ i ].x - data[ i ].size / 2,
+							upper: data[ i ].upper
+						} );
+					}
+				}
+				else{
+					if( data2[ index ] ){
+						data2[ index ].x += data2[ index ].size / 2;
+						index ++;
+					}
+				}
+			}
         }
 
         window.addEventListener( 'click', title );
