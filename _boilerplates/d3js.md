@@ -11,14 +11,20 @@ deps: [ 'https://d3js.org/d3.v4.0.0-alpha.28.min.js' ]
     }
 </style>
 
-<div id="render"></div>
+<div id='render'></div>
 
 <script>
-    window.addEventListener('load', function(){
-        var svg = d3.select('#render')
-            .append('svg')
-            .attr('width',1200)
-            .attr('height',300);
+    window.addEventListener( 'load', function() {
+        var h = 300, w;
+        var svg = d3.select( '#render' )
+            .append( 'svg' );
+
+        function getWidth(){
+            w = window.innerWidth > 1200 ? 1200 : window.innerWidth;
+            svg.attr( { width: w, height: h } )
+        }
+        getWidth();
+        window.addEventListener( 'resize', getWidth );
 
         svg.append('rect')
             .attr('x', 100)
