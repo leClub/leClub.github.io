@@ -35,13 +35,13 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
             };
         }))
         .enter()
-        .append("path")
-        .attr("d", arc)
+        .append('path')
+        .attr('d', arc)
         .attr('fill', 'white')
         .attr('transform', 'translate('+(w/2)+','+(h/2)+')');
     
     function arcTween(transition) {
-        transition.attrTween("d", function(d) {
+        transition.attrTween('d', function(d) {
             var interpolate = d3.interpolate(d.endAngle, d.newAngle);
             return function(t) {
                 d.endAngle = interpolate(t);
