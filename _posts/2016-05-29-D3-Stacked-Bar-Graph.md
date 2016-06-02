@@ -224,7 +224,7 @@ deps: [ 'https://d3js.org/d3.v3.min.js' ]
                 var sortedHeights = data.map( function( d ){
                     return d.height * d.pos;
                 } ).sort( function( a, b ){
-                    return -( a - b );
+                    return a - b;
                 } );
 
                 rects
