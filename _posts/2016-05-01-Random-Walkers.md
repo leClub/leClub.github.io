@@ -1,15 +1,9 @@
 ---
 layout: code
-title: Nature of Code - Introduction
-image: NOC-intro.gif
+title: Random Walkers
+image: Random-Walkers.png
 categories: [ js, canvas ]
 ---
-<style>
-    canvas{
-        background:#000;
-    }
-</style>
-
 <canvas id="cnvs"></canvas>
 
 <script>
@@ -59,7 +53,7 @@ categories: [ js, canvas ]
 
         var w;
         function setup(){
-            w = ( new Array( 500 ) ).fill( 0 ).map( function(){
+            w = ( new Array( 5000 ) ).fill( 0 ).map( function(){
                 return new RandomWalker( width / 2, height / 2 );
             } );
 
@@ -69,10 +63,10 @@ categories: [ js, canvas ]
         function animate(){
             window.requestAnimationFrame( animate );
 
-            context.fillStyle = 'rgba(0,0,0,0.02)';
+            context.fillStyle = 'rgba(30, 38, 48, 0.1)';
             context.fillRect( 0, 0, width, height );
 
-            context.fillStyle = '#fff';
+            context.fillStyle = '#FB3550';
             w.forEach( function( d ){
                 d.update();
                 d.checkBoundaries();

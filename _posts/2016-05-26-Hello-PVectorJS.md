@@ -5,12 +5,6 @@ image: Hello-PVectorjs.png
 categories: [ js, canvas, pvectorjs, tweenmax ]
 deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js' ]
 ---
-<style>
-    canvas{
-        background:#000;
-    }
-</style>
-
 <canvas id="cnvs"></canvas>
 
 <script>
@@ -41,7 +35,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
             marginX = width - gridSize * nx;
             marginY = height - gridSize * ny;
 
-            context.strokeStyle = 'black';
+            context.strokeStyle = '#FB3550';
             moveMouse();
             animate();
         }
@@ -58,10 +52,10 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         function animate(){
             window.requestAnimationFrame(animate);
 
-            context.fillStyle = 'white';
+            context.fillStyle = '#1E2630';
             context.fillRect(0,0,width,height);
 
-            context.fillStyle = 'black';
+            context.fillStyle = '#FB3550';
             var vMouse = new PVector(mouse.x, mouse.y);
             for (var y = 0; y <= ny; y++) {
                 for (var x = 0; x <= nx; x++) {
@@ -80,7 +74,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
                 }
             }
 
-            context.fillStyle = '#ff1212';
+            context.fillStyle = '#FB3550';
             context.beginPath();
             context.arc(mouse.x, mouse.y, 5, 0, 2 * Math.PI);
             context.fill();

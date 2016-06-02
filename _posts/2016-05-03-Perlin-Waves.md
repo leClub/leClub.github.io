@@ -1,14 +1,11 @@
 ---
 layout: code
 title: Perlin Waves
-image: PerlinNoise.png
+image: Perlin-Waves.png
 categories: [ big, js, canvas, simplexnoise ]
 deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.min.js', 'https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js' ]
 ---
 <style>
-    canvas{
-        background:#000;
-    }
     #cnvsContainer{
         position: relative;
     }
@@ -63,8 +60,8 @@ deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.mi
 
         function setup(){
             animate();
-            context.strokeStyle = 'white';;
-            context.fillStyle = 'rgba(0,0,0,0.5)';
+            context.strokeStyle = '#FB3550';
+            context.fillStyle = 'rgba(32,43,56,0.5)';
             context.lineWidth = 1;
         }
 

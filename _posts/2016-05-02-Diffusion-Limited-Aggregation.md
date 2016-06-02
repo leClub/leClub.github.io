@@ -4,12 +4,6 @@ title: Diffusion Limited Aggregation
 image: DLA.png
 categories: [ js, canvas ]
 ---
-<style>
-    canvas{
-        background: #131313;
-    }
-</style>
-
 <canvas id="cnvs"></canvas>
 
 <script>
@@ -61,19 +55,6 @@ categories: [ js, canvas ]
             return dla[ x + y * width ];
         }
 
-        // Based on Inigo Quilez' article 'Simple Color Palettes'
-        // http://iquilezles.org/www/articles/palettes/palettes.htm
-        var a = [ 0.5, 0.5, 0.5 ],
-            b = [ 0.5, 0.5, 0.5 ],
-            c = [ 1.0, 1.0, 1.0 ],
-            d = [ 0.00, 0.33, 0.67 ];
-        function getColor( t ){
-            function calc( t, i ){
-                return ~~( 255 * ( a[ i ] + b[ i ] * Math.cos( 2 * Math.PI * ( c[ i ] * t + d[ i ] ) ) ) );
-            }
-            return 'rgb(' + calc( t, 0 ) + ',' + calc( t, 1 ) + ',' + calc( t, 2 ) + ')';
-        }
-
         var walkers, dla, count;
         function setup(){
             count = 0;
@@ -94,7 +75,7 @@ categories: [ js, canvas ]
                 return new RandomWalker( ~~( Math.random() * width ), ~~( Math.random() * height ) );
             } );
 
-            context.fillStyle = 'black';
+            context.fillStyle = '#1E2630';
             context.fillRect( 0, 0, width, height );
             animate();
         }
@@ -106,7 +87,7 @@ categories: [ js, canvas ]
                     yoffset = Math.round( random( -1, 1 ) );
                 
                 if( checkDLA( d.x + xoffset, d.y + yoffset) ){
-                    context.fillStyle = getColor( count / ( width * height ) );
+                    context.fillStyle = 'rgb(251, 53, 80)';
                     count++;
                     d.display();
                     dla[ d.x + d.y * width ] = true;

@@ -100,7 +100,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         };
 
         ParticleSystem.prototype.run = function(field) {
-            context.strokeStyle = 'rgba(255,255,255,0.2)';
+            context.strokeStyle = 'rgba( 251, 53, 80, 0.2)';
             this.particles.forEach(function(p){
                 p.applyForce( field.getForce( p.loc ) );
                 p.update();
@@ -152,20 +152,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
             return this.vecs[ ~~( constrain( v.x, 0, width - 1 ) / this.w ) ][ ~~( constrain( v.y, 0, height - 1 ) / this.h ) ];
         };
 
-        FlowField.prototype.display = function() {
-            context.strokeStyle = 'rgba(74,154,240,0.1)';
-            for (var i = 0; i < this.nx; i++ ) {
-                for (var j = 0; j < this.ny; j++ ) {
-                    context.beginPath();
-                    context.moveTo( i * this.w + this.w / 2, j * this.h + this.h / 2 );
-                    context.lineTo( i * this.w + this.w / 2 + this.vecs[i][j].x, j * this.h + this.h / 2 + this.vecs[i][j].y );
-                    context.stroke();
-                }
-            }
-        };
-
         function setup(){
-
             simplex = new SimplexNoise();
             flowfield = new FlowField(50,50,40);
             particleSystem = new ParticleSystem( 10000 );
@@ -173,7 +160,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
 
             flowfield.update(frame);
 
-            context.fillStyle = 'rgba( 15, 15, 33, 1 )';
+            context.fillStyle = 'rgba( 30, 38, 48, 1 )';
             context.fillRect(0,0,width,height);
 
             animate();
@@ -182,12 +169,10 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         function animate(){
             window.requestAnimationFrame(animate);
             
-            // context.fillStyle = '#121233';
-            context.fillStyle = 'rgba( 15, 15, 33, .1 )';
+            context.fillStyle = 'rgba( 30, 38, 48, .1 )';
             context.fillRect(0,0,width,height);
 
             flowfield.update(frame/300);
-            // flowfield.display();
 
             particleSystem.run(flowfield);
 
