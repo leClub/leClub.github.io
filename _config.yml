@@ -15,7 +15,7 @@ permalink: /:year/:month/:title/
 future: true
 encoding: utf-8
 
-exclude: [README.md, LICENSE, CNAME]
+exclude: [README.md, LICENSE, CNAME, start.bat]
 include: [.htaccess]
 show_drafts: false
 
