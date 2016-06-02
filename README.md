@@ -3,18 +3,14 @@ leClub.github.io
 
 Official websites for [Le Club](http://leclub.github.io)
 
-## How it works
-
-* Add a workshops description in ```_workshops```
-* Add an event in ```_posts``` with the date in the filename
-
-
 Written in Jekyll
 
-    Jekyll server # on port 4000
+```jekyll serve [--port 4000] [--drafts]```
 
-## Refs for Markdown, HandleBars and Skeleton
+## Refs for Markdown, Jekyll and Liquid
 
 * https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
-* http://handlebarsjs.com/
-* http://getskeleton.com/
+* https://jekyllrb.com/
+* https://github.com/Shopify/liquid/wiki
+
+[Check _boilerplates folder for quick templating](https://github.com/leClub/leClub.github.io/tree/master/_boilerplates)
