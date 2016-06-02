@@ -1,7 +1,7 @@
 ---
 layout: code
 title: Random Walkers
-image: Random-Walkers.png
+image: Random-Walkers.PNG
 categories: [ js, canvas ]
 ---
 <canvas id="cnvs"></canvas>
