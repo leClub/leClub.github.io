@@ -5,9 +5,6 @@ image: Glitch-Shader.png
 categories: [ big, threejs ]
 deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
 ---
-<style>
-</style>
-
 <script id="vertexShader" type="x-shader/x-vertex">
     void main() {
         gl_Position = vec4( position, 1.0 );
@@ -84,7 +81,6 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
     window.addEventListener( 'load', function(){
         var w = ( window.innerWidth > 1200 ? 1200 : window.innerWidth ), h = 600,
             camera, scene, renderer, uniforms,
-            startTime = new Date().getTime(),
             mouse = {
                 x : 0,
                 y : 0
@@ -149,7 +145,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
 
             renderer = new THREE.WebGLRenderer( { alpha: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setClearColor( 0xffffff, 1 );
+            renderer.setClearColor( 0xffffff, 0 );
             
             container.appendChild( renderer.domElement );
 

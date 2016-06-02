@@ -9,7 +9,10 @@ deps: []
     #send{
         height: 100px;
         width: 100%;
-        background: red;
+        background: #FB3550;
+    }
+    #send:hover{
+        cursor: pointer;
     }
 </style>
 <div id="send"></div>

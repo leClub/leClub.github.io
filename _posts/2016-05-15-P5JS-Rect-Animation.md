@@ -41,7 +41,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js' ]
                 }
                 updatePos();
 
-                if( p.frameCount % 100 === 0 ) initVal();
+                if( p.frameCount % 200 === 0 ) initVal();
             }
 
             function initVal(){
@@ -57,6 +57,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js' ]
                     first = false;
                     c1 = p.color( 251, 53, 80 );
                     c2 = p.color( 30, 38, 48 );
+                    p.frameCount = 100;
                 }
                 else{
                     c1 = p.color( ~~ p.random(255), ~~ p.random(255), ~~ p.random(255) );
@@ -87,6 +88,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js' ]
             }
 
             p.mousePressed = function(){
+                first = true;
                 initVal();
             }
 

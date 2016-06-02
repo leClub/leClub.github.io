@@ -37,8 +37,9 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
             });
         }
 
-        var paths, nb ;
+        var paths, nb, n;
         function init(){
+            n = 1 + ~~( Math.random() * 10 );
             nb = 5 + ~~( Math.random() * 50 );
             paths = svg.selectAll( 'path' )
                 .remove()
@@ -71,7 +72,15 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
                 .duration( 300 )
                 .each( 'end', function( d ){
                     count ++;
-                    if( count === nb ) anim();
+                    if( count === nb ){
+                        n --;
+                        if( n === 0){
+                            terminate();
+                        }
+                        else{
+                            anim();
+                        }
+                    }
                 } );
         }
 
@@ -89,7 +98,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
             });
         }
 
-        svg.node().addEventListener('click', function(){
+        function terminate(){
             var count = 0;
             paths
                 .transition()
@@ -100,6 +109,8 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
                     count ++;
                     if( count === nb ) init();
                 } );
-        } );
+        }
+
+        svg.node().addEventListener('click', terminate );
     } );
 </script>

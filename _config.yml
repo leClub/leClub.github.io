@@ -8,6 +8,8 @@ github: leclub
 email: "contact@leclub.io"
 twitter: __leClub
 
+url: http://leclub.io
+
 # build settings
 permalink: /:year/:month/:title/
 future: true
