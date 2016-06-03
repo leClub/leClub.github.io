@@ -1,6 +1,6 @@
 ---
 layout: code
-title: d3 boilerplate
+title: D3 Ease and Interpolation Visualization
 image: logo.svg
 categories: [ d3js ]
 deps: [ 'https://d3js.org/d3.v4.0.0-alpha.28.min.js' ]

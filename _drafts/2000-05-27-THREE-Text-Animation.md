@@ -2,7 +2,7 @@
 layout: code
 title: THREE Text Animation
 image: 
-categories: [ threejs ]
+categories: [ big, threejs ]
 deps: [ '//cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/bas.js', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/TextGeometry.js', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/FontUtils.js', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/pnltri.min.js', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/droid_sans_bold.typeface.js', '//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js' ]
 ---
 <div id="render"></div>
