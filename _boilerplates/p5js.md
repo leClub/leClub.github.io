@@ -8,38 +8,31 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js' ]
 <div id="render"></div>
 
 <script>
-    //documentation: <a href="http://p5js.org/reference/">http://p5js.org/reference/</a>
+    var canvas;
+    var darkblue, electricred;
 
-    window.addEventListener( 'load', function(){
-        var sketch = function ( p ) {
-            var darkblue; 
-            var electricred;
+    function setup(){
+        canvas = createCanvas( 1200, 600 );
+        canvas.parent( '#render' );
+        noStroke();
 
-            p.setup = function () {
-                p.createCanvas( 1200, 600 );
-                p.noStroke();
+        darkblue = color( 30, 38, 48 ); 
+        electricred = color( 251, 53, 80 );
+    }
 
-                darkblue = p.color( 30, 38, 48 ); 
-                electricred = p.color( 251, 53, 80 );
-            };
+    function draw () {
+        background( darkblue );
 
-            p.draw = function () {
-                p.background( darkblue );
+        for ( var i = 0; i < 10; i++ ) {
+            fill( 251, 53, 80, 255 / 10 * ( i + 1 ) );
+            rect( width / 10 * i, 0, width / 10, height );
+        }
 
-                for ( var i = 0; i < 10; i++ ) {
-                    p.fill( 251, 53, 80, 255 / 10 * ( i + 1 ) );
-                    p.rect( p.width / 10 * i, 0, p.width / 10, p.height );
-                }
+        fill( electricred );
+        ellipse( mouseX, mouseY, 200, 200 );
+    }
 
-                p.fill( electricred );
-                p.ellipse( p.mouseX, p.mouseY, 200, 200 );
-            };
-
-            p.windowResized = function() {
-                p.resizeCanvas( window.innerWidth < 1200 ? window.innerWidth : 1200, 600 );
-            }
-        };
-
-        new p5( sketch, document.getElementById( 'render' ) );
-    });
+    function windowResized() {
+        resizeCanvas( window.innerWidth < 1200 ? window.innerWidth : 1200, 600 );
+    }
 </script>
