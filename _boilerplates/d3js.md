@@ -3,7 +3,7 @@ layout: code
 title: d3 boilerplate
 image: logo.svg
 categories: [ d3js ]
-deps: [ 'https://d3js.org/d3.v4.0.0-alpha.28.min.js' ]
+deps: [ 'https://d3js.org/d3.v3.min.js' ]
 ---
 <div id='render'></div>
 

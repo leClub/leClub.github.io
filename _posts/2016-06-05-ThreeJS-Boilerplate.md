@@ -134,15 +134,14 @@ deps: [
             scene.add( icosahedron );
 
             // Dome
-            geometry = new THREE.IcosahedronGeometry( 800, 1 );
+            geometry = new THREE.IcosahedronGeometry( 700, 1 );
             var domeMaterial =  new THREE.MeshPhongMaterial( {
                 color: 0xfb3550,
                 shading: THREE.FlatShading,
                 side: THREE.BackSide
             } );
-            var icosahedron = new THREE.Mesh( geometry, domeMaterial );
-            icosahedron.position.set( 40, 15, 100 );
-            scene.add( icosahedron );
+            var dome = new THREE.Mesh( geometry, domeMaterial );
+            scene.add( dome );
 
             // Geometry from vertices
             geometry = new THREE.Geometry();
