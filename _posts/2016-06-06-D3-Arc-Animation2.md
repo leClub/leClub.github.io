@@ -1,7 +1,7 @@
 ---
 layout: code
-title: Arc Animation with D3
-image: D3-Arc-Animation.png
+title: Polar Graph with D3 
+image: D3-Arc-Animation2.png
 categories: [ big, d3js ]
 deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
 ---
@@ -25,10 +25,10 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
         
         function arcTween( transition ) {
             transition.attrTween( 'd', function( d ) {
-                var start = Math.random() * 3 * Math.PI;
+                var start = ~~( Math.random() * 36 ) * 10 / 180 * Math.PI;
 
                 var interpolateStart = d3.interpolate( d.startAngle, start );
-                var interpolateEnd = d3.interpolate( d.endAngle, start + Math.random() * Math.PI * 2 );
+                var interpolateEnd = d3.interpolate( d.endAngle, start + ~~( 1 + Math.random() * 18 ) * 10 / 180 * Math.PI  - Math.PI);
                 return function( t ) {
                     d.startAngle = interpolateStart( t );
                     d.endAngle = interpolateEnd( t );
@@ -40,23 +40,26 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
         var paths, nb, n;
         function init(){
             n = 1 + ~~( Math.random() * 10 );
-            nb = 5 + ~~( Math.random() * 50 );
+            nb = 150 + ~~( Math.random() * 250 );
             paths = svg.selectAll( 'path' )
                 .remove()
                 .data( d3.range( nb ).map( function(){
-                    var inRad = 50 + Math.random() * 500;
+                    var inRad = 100 + ~~( Math.random() * 45 ) * 10;
 
                     return {
                         startAngle: 0,
                         endAngle: 0,
                         innerRadius: inRad,
-                        outerRadius: inRad + Math.random() * 60
+                        outerRadius: inRad + 10.1
                     };
                 } ) )
                 .enter()
                 .append( 'path' )
                 .attr( 'd', arc )
                 .attr( 'fill', 'rgba( 251, 53, 80, 0.8 )' )
+                .attr( 'opacity', function( d ){
+                    return ~~( Math.random() * 10 ) / 10;
+                } )
                 .attr( 'transform', 'translate(' + ( w / 2 ) + ',' + ( h / 2 ) + ')' );
 
             anim();
@@ -67,9 +70,12 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
             paths
                 .transition()
                 .duration( 1000 )
+                .delay( function( d, i ){
+                    return i * 5;
+                } )
                 .call( arcTween )
                 .transition()
-                .duration( 300 )
+                .duration( 1000 )
                 .each( 'end', function( d ){
                     count ++;
                     if( count === nb ){
@@ -88,8 +94,8 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
 
         function arcTerminate( transition ) {
             transition.attrTween( 'd', function( d ) {
-                var interpolateStart = d3.interpolate( d.startAngle, Math.PI * 2 );
-                var interpolateEnd = d3.interpolate( d.endAngle, Math.PI * 2 );
+                var interpolateStart = d3.interpolate( d.startAngle, Math.PI );
+                var interpolateEnd = d3.interpolate( d.endAngle, Math.PI );
                 return function( t ) {
                     d.startAngle = interpolateStart( t );
                     d.endAngle = interpolateEnd( t );

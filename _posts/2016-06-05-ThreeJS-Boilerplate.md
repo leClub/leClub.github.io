@@ -3,7 +3,12 @@ layout: code
 title: threejs boilerplate
 image: Three-Boilerplate.PNG
 categories: [ threejs ]
-deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/Detector.js', 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/stats.min.js', 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js' ]
+deps: [
+    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js',
+    'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/Detector.js',
+    'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/stats.min.js',
+    'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js'
+]
 ---
 <style>
     #container{
@@ -37,8 +42,9 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
 
             // camera
             camera = new THREE.PerspectiveCamera( 60, w / h, 1, 1000 );
-            camera.position.z = 200;
-            camera.position.y = 40;
+            camera.position.x = 140;
+            camera.position.y = 25;
+            camera.position.z = 140;
             controls = new THREE.TrackballControls( camera, container );
             controls.rotateSpeed = 2.0;
             controls.zoomSpeed = 1.2;
@@ -95,6 +101,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
             geometry = new THREE.BoxGeometry( 10, 50, 10 );
             var cube = new THREE.Mesh( geometry, material );
             cube.position.set( 100, 25, -30 );
+            cube.rotation.y = 45;
             scene.add( cube );
 
             //sphere
@@ -106,7 +113,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
 
             //cylinder
             //CylinderGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded, thetaStart, thetaLength)
-            geometry = new THREE.CylinderGeometry( 10, 20, 40, 8 );
+            geometry = new THREE.CylinderGeometry( 0, 20, 40, 20 );
             var cylinder = new THREE.Mesh( geometry, material );
             cylinder.position.set( -90, 20, 30 );
             scene.add( cylinder );
@@ -121,11 +128,33 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
 
             //Icosahedron
             //IcosahedronGeometry(RADIUS, DETAIL)
-            // geometry = new THREE.IcosahedronGeometry( 10, 0 );
-            geometry = new THREE.IcosahedronGeometry( 15, 1 );
+            geometry = new THREE.IcosahedronGeometry( 15, 0 );
             var icosahedron = new THREE.Mesh( geometry, material );
             icosahedron.position.set( 40, 15, 100 );
             scene.add( icosahedron );
+
+            // Dome
+            geometry = new THREE.IcosahedronGeometry( 700, 1 );
+            var domeMaterial =  new THREE.MeshPhongMaterial( {
+                color: 0xfb3550,
+                shading: THREE.FlatShading,
+                side: THREE.BackSide
+            } );
+            var dome = new THREE.Mesh( geometry, domeMaterial );
+            scene.add( dome );
+
+            // Geometry from vertices
+            geometry = new THREE.Geometry();
+            geometry.vertices.push(
+                new THREE.Vector3( -30,  30, 0 ),
+                new THREE.Vector3( -30, 0, 30 ),
+                new THREE.Vector3(  30, 0, -30 )
+            );
+            geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+            geometry.computeFaceNormals();
+            var face = new THREE.Mesh( geometry, planeMaterial );
+            face.position.set( 0, 0, 70 );
+            scene.add( face );
 
             //dynamic generation
             for ( var i = 0; i < 500; i ++ ) {
