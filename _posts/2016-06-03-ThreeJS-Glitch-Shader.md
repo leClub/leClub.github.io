@@ -2,7 +2,7 @@
 layout: code
 title: Glitch Shader with Threejs
 image: Glitch-Shader.png
-categories: [ big, threejs ]
+categories: [ big, threejs, glsl ]
 deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
 ---
 <script id="vertexShader" type="x-shader/x-vertex">

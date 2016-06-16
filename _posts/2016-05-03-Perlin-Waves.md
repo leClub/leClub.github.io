@@ -6,7 +6,7 @@ categories: [ big, js, canvas, simplexnoise ]
 deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.min.js', 'https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js' ]
 ---
 <style>
-    #cnvsContainer{
+    #container{
         position: relative;
     }
     .dg{
@@ -15,7 +15,7 @@ deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.mi
         right: 0;
     }
 </style>
-<div id="cnvsContainer">
+<div id="container">
     <canvas id="cnvs"></canvas>
 </div>
 

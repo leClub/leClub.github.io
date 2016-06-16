@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://localhost:4000/2016/06/ThreeJS-Texture-Ping-Pong/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    
+    <title>Le Club | Glitch Shader with Threejs</title>
+    <meta name="description" content="Le Club delivers training, workshops and support for creative projects.">
+
+    <!-- Google Fonts -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'> -->
+
+    <!-- CSS Reset + Font-Awesome -->
+    <link rel="stylesheet" href="./Le Club _ Glitch Shader with Threejs_files/normalize.css">
+    <link rel="stylesheet" href="./Le Club _ Glitch Shader with Threejs_files/font-awesome.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./Le Club _ Glitch Shader with Threejs_files/main.css">
+
+
+    <!-- Favicon -->
+    <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHxJREFUeNpiZMABFLQtAoBUP5Rb+ODqiQ3Y1DFi0WgA1eiAJnUAatAFrAYANQpANSYw4AcLoAZ9AHGYoZoLgNR6ILZgIAxALswQEJP5+eH1kxNMUEGQzQIMxAOYaxmYGCgEowYMJgMKgfgDCfo+QPVQnpSpl5nIzc4AAQYAdO4tUEtuuSkAAAAASUVORK5CYII=" rel="icon" type="image/x-icon">
+
+    <link rel="canonical" href="http://leclub.io/2016/06/ThreeJS-Texture-Ping-Pong/">
+</head>
+<body data-pinterest-extension-installed="cr1.39.1">
+
+
+<a href="http://localhost:4000/">
+    <header>
+        <h1>Le Club</h1>
+    </header>
+</a>
+
+<article class="post">
+    <h1 class="title">
+        Glitch Shader with Threejs
+
+        
+
+        
+
+        
+            <br><small>
+            
+                
+                    
+                
+
+                <a href="http://localhost:4000/2016/06/ThreeJS-Texture-Ping-Pong/#">threejs</a>
+                
+            
+            </small>
+        
+    </h1>
+
+    <hr>
+
+    <div id="code">
+<link href="./Le Club _ Glitch Shader with Threejs_files/css" rel="stylesheet" type="text/css">
+
+<style>
+    canvas{
+        display: inline;
+    }    
+</style>
+
+<script async="" src="./Le Club _ Glitch Shader with Threejs_files/analytics.js"></script><script id="vertexShader" type="x-shader/x-vertex">
+    varying vec2 vUv;
+
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );;
+    }
+</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+    uniform vec2 u_resolution;
+    uniform sampler2D u_texture;
+
+    void main( void ){
+        vec2 st = gl_FragCoord.xy / u_resolution;
+        vec4 color = vec4( 1.0 );
+        color.rgb *= texture2D( u_texture, st ).g;
+        gl_FragColor = color;
+    }
+</script>
+
+<script id="fragmentShader2" type="x-shader/x-fragment">
+    uniform int u_timer;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform sampler2D u_start;
+    uniform sampler2D u_texture;
+
+    varying vec2 vUv;
+    
+    float dA = 1.1;
+    float dB = 0.5;
+    float feed = 0.065;
+    float k = 0.062;
+    float dt = 1.0;
+
+    vec2 pos;
+
+
+    vec2 getLaplace() {
+        vec2 offset = vec2( 1.0 ) / u_resolution;
+        vec2 pos0 = pos + vec2( -offset.x,  -offset.y );
+        vec2 pos1 = pos + vec2(       0.0,  -offset.y );
+        vec2 pos2 = pos + vec2(  offset.x,  -offset.y );
+        vec2 pos3 = pos + vec2( -offset.x,        0.0 );
+        vec2 pos4 = pos + vec2(       0.0,        0.0 );
+        vec2 pos5 = pos + vec2(  offset.x,        0.0 );
+        vec2 pos6 = pos + vec2( -offset.x,   offset.y );
+        vec2 pos7 = pos + vec2(       0.0,   offset.y );
+        vec2 pos8 = pos + vec2(  offset.x,   offset.y );
+
+        vec2 col0 = texture2D( u_texture, pos0 ).rg;
+        vec2 col1 = texture2D( u_texture, pos1 ).rg;
+        vec2 col2 = texture2D( u_texture, pos2 ).rg;
+        vec2 col3 = texture2D( u_texture, pos3 ).rg;
+        vec2 col4 = texture2D( u_texture, pos4 ).rg;
+        vec2 col5 = texture2D( u_texture, pos5 ).rg;
+        vec2 col6 = texture2D( u_texture, pos6 ).rg;
+        vec2 col7 = texture2D( u_texture, pos7 ).rg;
+        vec2 col8 = texture2D( u_texture, pos8 ).rg;
+
+        vec2 sum = col0 * 0.05 + col1 * 0.2 + col2 * 0.05 +
+                   col3 * 0.2  - col4 * 1.0 + col5 * 0.2  +
+                   col6 * 0.05 + col7 * 0.2 + col8 * 0.05;
+
+        return sum;
+    }
+
+    void main( void ){
+        pos = gl_FragCoord.xy / u_resolution;
+
+        vec2 color;
+
+        if( u_timer == 1 ) {
+            color = vec2( 1.0, step( 0.1, texture2D( u_start, pos ).g ) );
+        }
+        else {
+            vec2 texColor = texture2D( u_texture, pos ).rg;
+            float a = texColor.r;
+            float b = texColor.g;
+
+            vec2 laplace = getLaplace();
+
+            float red = (
+                ( dA * laplace.r ) -
+                ( a * b * b ) +
+                ( feed * ( 1.0 - a ) )
+                ) * dt;
+
+            float green = (
+                ( dB * laplace.g ) +
+                ( a * b * b ) -
+                ( ( k + feed ) * b )
+                ) * dt;
+
+            color = texColor + vec2( red, green );
+            
+            color.r += 1.0 - smoothstep( 10.0, 11.0, distance( gl_FragCoord.xy, u_mouse ) );
+        }
+
+        gl_FragColor = vec4( color, 0.0, 1.0 );
+    }
+</script>
+
+<div id="container"><canvas width="1200" height="600" style="width: 1200px; height: 600px;"></canvas></div>
+
+<script>
+    window.addEventListener( 'load', function(){
+        var w = window.innerWidth > 1200 ? 1200 : window.innerWidth, h = 600,
+        // var w = 1024, h = 1024,
+            camera, scene, renderer, uniforms, startText, 
+            camera2, scene2, current, ping, pong,
+            timer = 0, mouse = { x : 0, y : 0 };
+
+        ( function init() {
+            var container = document.getElementById( 'container' );
+            
+            ( function setStartTex(){
+                var cnvs = document.createElement( 'canvas' );
+                cnvs.width = 1024;
+                cnvs.height = 512;
+                var ctx = cnvs.getContext( '2d' );
+                ctx.fillStyle = 'black';
+                ctx.fillRect( 0, 0, 1024, 512 );
+                ctx.font = '800 300px Roboto';
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText( 'Le Club', 1024 / 2, 512 / 2 );
+
+                startText = new THREE.Texture( cnvs );
+            } )();
+
+            ( function setupPingPong(){
+                camera2 = new THREE.Camera();
+                camera2.position.z = 1;
+                scene2 = new THREE.Scene();
+
+                var renderTargetParams = {
+                    minFilter: THREE.LinearFilter,
+                    magFilter: THREE.LinearFilter,
+                    format: THREE.RGBAFormat,
+                    type: THREE.FloatType
+                };
+
+                ping = new THREE.WebGLRenderTarget( w, h, renderTargetParams );
+                pong = new THREE.WebGLRenderTarget( w, h, renderTargetParams );
+                ping.texture.wrapS = THREE.ClampToEdgeWrapping;
+                ping.texture.wrapT = THREE.ClampToEdgeWrapping;
+                pong.texture.wrapS = THREE.ClampToEdgeWrapping;
+                pong.texture.wrapT = THREE.ClampToEdgeWrapping;
+
+                uniforms2 = {
+                    u_timer : {
+                        type: 'i',
+                        value: 0
+                    },
+                    u_resolution : {
+                        type : 'v2',
+                        value : new THREE.Vector2()
+                    },
+                    u_mouse : {
+                        type : 'v2',
+                        value : new THREE.Vector2()
+                    },
+                    u_start : {
+                        type : 't',
+                        value : startText
+                    },
+                    u_texture : {
+                        type : 't',
+                        value : pong
+                    }
+                };
+
+                var material2 = new THREE.ShaderMaterial( {
+                    uniforms : uniforms2,
+                    vertexShader : document.getElementById( 'vertexShader' ).textContent,
+                    fragmentShader : document.getElementById( 'fragmentShader2' ).textContent
+                } );
+
+                var geometry2 = new THREE.PlaneBufferGeometry( 2, 2 );
+
+                var mesh2 = new THREE.Mesh( geometry2, material2 );
+                scene2.add( mesh2 );
+
+                startText.needsUpdate = true;
+            } )();
+
+            ( function setupScene(){
+                renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } );
+                renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setClearColor( 0x665544, 1 );
+                container.appendChild( renderer.domElement );
+                
+                camera = new THREE.Camera();
+                camera.position.z = 1;
+                scene = new THREE.Scene();
+
+                uniforms = {
+                    u_resolution : {
+                        type : 'v2',
+                        value : new THREE.Vector2( w, h )
+                    },
+                    u_texture : {
+                        type : 't',
+                        value : pong,
+                        minFilter : THREE.NearestFilter 
+                    }
+                };
+                var material = new THREE.ShaderMaterial( {
+                    uniforms : uniforms,
+                    vertexShader : document.getElementById( 'vertexShader' ).textContent,
+                    fragmentShader : document.getElementById( 'fragmentShader' ).textContent
+                } );
+                var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+                var mesh = new THREE.Mesh( geometry, material );
+                scene.add( mesh );
+            } )();
+        } )();
+
+        ( function setupEvents(){
+            function updateMouse( canvas, evt ) {
+                var rect = canvas.getBoundingClientRect();
+                mouse.x = evt.clientX - rect.left;
+                mouse.y = evt.clientY - rect.top;
+            }
+
+            renderer.domElement.addEventListener( 'mousemove', function( evt ) {
+                updateMouse( renderer.domElement, evt );
+    
+                uniforms2.u_mouse.value.x = mouse.x;
+                uniforms2.u_mouse.value.y = h - mouse.y;
+            } );
+    
+            function onWindowResize( event ) {
+                w = window.innerWidth > 1200 ? 1200 : window.innerWidth;
+                renderer.setSize( w, h );
+    
+                uniforms.u_resolution.value.x = w;
+                uniforms.u_resolution.value.y = h;
+    
+                uniforms2.u_resolution.value.x = w;
+                uniforms2.u_resolution.value.y = h;
+            }
+            onWindowResize();
+            window.addEventListener( 'resize', onWindowResize, false );
+        } )();
+
+        ( function rendering(){
+            ( function render() {
+                requestAnimationFrame( render );
+
+                stepSim();
+                stepSim();
+
+                renderer.render( scene, camera );
+
+                ++ uniforms2.u_timer.value;
+            } )();
+
+            function stepSim() {
+                renderer.render( scene2, camera2, ping, true );
+                swapBuffers();
+            }
+
+            function swapBuffers() {
+                var a = pong;
+                pong = ping;
+                ping = a;
+                uniforms2.u_texture.value = pong;
+            }
+        } )();
+    } );
+</script>
+
+<link href="./Le Club _ Glitch Shader with Threejs_files/css" rel="stylesheet" type="text/css">
+
+
+<!-- Dependencies -->
+<script src="./Le Club _ Glitch Shader with Threejs_files/three.min.js"></script>
+
+</div>
+
+<!-- show code -->
+<pre><code id="viewCode" class="hljs xml">
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://fonts.googleapis.com/css?family=Raleway:900italic"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-selector-tag">canvas</span>{
+        <span class="hljs-attribute">display</span>: inline;
+    }    
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"vertexShader"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"x-shader/x-vertex"</span>&gt;</span><span class="javascript">
+    varying vec2 vUv;
+
+    <span class="hljs-keyword">void</span> main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, <span class="hljs-number">1.0</span> );;
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"fragmentShader"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"x-shader/x-fragment"</span>&gt;</span><span class="javascript">
+    uniform vec2 u_resolution;
+    uniform sampler2D u_texture;
+
+    <span class="hljs-keyword">void</span> main( <span class="hljs-keyword">void</span> ){
+        vec2 st = gl_FragCoord.xy / u_resolution;
+        vec4 color = vec4( <span class="hljs-number">1.0</span> );
+        color.rgb *= texture2D( u_texture, st ).g;
+        gl_FragColor = color;
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"fragmentShader2"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"x-shader/x-fragment"</span>&gt;</span><span class="javascript">
+    uniform int u_timer;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform sampler2D u_start;
+    uniform sampler2D u_texture;
+
+    varying vec2 vUv;
+    
+    float dA = <span class="hljs-number">1.1</span>;
+    float dB = <span class="hljs-number">0.5</span>;
+    float feed = <span class="hljs-number">0.065</span>;
+    float k = <span class="hljs-number">0.062</span>;
+    float dt = <span class="hljs-number">1.0</span>;
+
+    vec2 pos;
+
+
+    vec2 getLaplace() {
+        vec2 offset = vec2( <span class="hljs-number">1.0</span> ) / u_resolution;
+        vec2 pos0 = pos + vec2( -offset.x,  -offset.y );
+        vec2 pos1 = pos + vec2(       <span class="hljs-number">0.0</span>,  -offset.y );
+        vec2 pos2 = pos + vec2(  offset.x,  -offset.y );
+        vec2 pos3 = pos + vec2( -offset.x,        <span class="hljs-number">0.0</span> );
+        vec2 pos4 = pos + vec2(       <span class="hljs-number">0.0</span>,        <span class="hljs-number">0.0</span> );
+        vec2 pos5 = pos + vec2(  offset.x,        <span class="hljs-number">0.0</span> );
+        vec2 pos6 = pos + vec2( -offset.x,   offset.y );
+        vec2 pos7 = pos + vec2(       <span class="hljs-number">0.0</span>,   offset.y );
+        vec2 pos8 = pos + vec2(  offset.x,   offset.y );
+
+        vec2 col0 = texture2D( u_texture, pos0 ).rg;
+        vec2 col1 = texture2D( u_texture, pos1 ).rg;
+        vec2 col2 = texture2D( u_texture, pos2 ).rg;
+        vec2 col3 = texture2D( u_texture, pos3 ).rg;
+        vec2 col4 = texture2D( u_texture, pos4 ).rg;
+        vec2 col5 = texture2D( u_texture, pos5 ).rg;
+        vec2 col6 = texture2D( u_texture, pos6 ).rg;
+        vec2 col7 = texture2D( u_texture, pos7 ).rg;
+        vec2 col8 = texture2D( u_texture, pos8 ).rg;
+
+        vec2 sum = col0 * <span class="hljs-number">0.05</span> + col1 * <span class="hljs-number">0.2</span> + col2 * <span class="hljs-number">0.05</span> +
+                   col3 * <span class="hljs-number">0.2</span>  - col4 * <span class="hljs-number">1.0</span> + col5 * <span class="hljs-number">0.2</span>  +
+                   col6 * <span class="hljs-number">0.05</span> + col7 * <span class="hljs-number">0.2</span> + col8 * <span class="hljs-number">0.05</span>;
+
+        <span class="hljs-keyword">return</span> sum;
+    }
+
+    <span class="hljs-keyword">void</span> main( <span class="hljs-keyword">void</span> ){
+        pos = gl_FragCoord.xy / u_resolution;
+
+        vec2 color;
+
+        <span class="hljs-keyword">if</span>( u_timer == <span class="hljs-number">1</span> ) {
+            color = vec2( <span class="hljs-number">1.0</span>, step( <span class="hljs-number">0.1</span>, texture2D( u_start, pos ).g ) );
+        }
+        <span class="hljs-keyword">else</span> {
+            vec2 texColor = texture2D( u_texture, pos ).rg;
+            float a = texColor.r;
+            float b = texColor.g;
+
+            vec2 laplace = getLaplace();
+
+            float red = (
+                ( dA * laplace.r ) -
+                ( a * b * b ) +
+                ( feed * ( <span class="hljs-number">1.0</span> - a ) )
+                ) * dt;
+
+            float green = (
+                ( dB * laplace.g ) +
+                ( a * b * b ) -
+                ( ( k + feed ) * b )
+                ) * dt;
+
+            color = texColor + vec2( red, green );
+            
+            color.r += <span class="hljs-number">1.0</span> - smoothstep( <span class="hljs-number">10.0</span>, <span class="hljs-number">11.0</span>, distance( gl_FragCoord.xy, u_mouse ) );
+        }
+
+        gl_FragColor = vec4( color, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span> );
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"container"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-built_in">window</span>.addEventListener( <span class="hljs-string">'load'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">var</span> w = <span class="hljs-built_in">window</span>.innerWidth &gt; <span class="hljs-number">1200</span> ? <span class="hljs-number">1200</span> : <span class="hljs-built_in">window</span>.innerWidth, h = <span class="hljs-number">600</span>,
+        <span class="hljs-comment">// var w = 1024, h = 1024,</span>
+            camera, scene, renderer, uniforms, startText, 
+            camera2, scene2, current, ping, pong,
+            timer = <span class="hljs-number">0</span>, mouse = { x : <span class="hljs-number">0</span>, y : <span class="hljs-number">0</span> };
+
+        ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> container = <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">'container'</span> );
+            
+            ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setStartTex</span>(<span class="hljs-params"></span>)</span>{
+                <span class="hljs-keyword">var</span> cnvs = <span class="hljs-built_in">document</span>.createElement( <span class="hljs-string">'canvas'</span> );
+                cnvs.width = <span class="hljs-number">1024</span>;
+                cnvs.height = <span class="hljs-number">512</span>;
+                <span class="hljs-keyword">var</span> ctx = cnvs.getContext( <span class="hljs-string">'2d'</span> );
+                ctx.fillStyle = <span class="hljs-string">'black'</span>;
+                ctx.fillRect( <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1024</span>, <span class="hljs-number">512</span> );
+                ctx.font = <span class="hljs-string">'800 300px Roboto'</span>;
+                ctx.fillStyle = <span class="hljs-string">'white'</span>;
+                ctx.textAlign = <span class="hljs-string">'center'</span>;
+                ctx.textBaseline = <span class="hljs-string">'middle'</span>;
+                ctx.fillText( <span class="hljs-string">'Le Club'</span>, <span class="hljs-number">1024</span> / <span class="hljs-number">2</span>, <span class="hljs-number">512</span> / <span class="hljs-number">2</span> );
+
+                startText = <span class="hljs-keyword">new</span> THREE.Texture( cnvs );
+            } )();
+
+            ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupPingPong</span>(<span class="hljs-params"></span>)</span>{
+                camera2 = <span class="hljs-keyword">new</span> THREE.Camera();
+                camera2.position.z = <span class="hljs-number">1</span>;
+                scene2 = <span class="hljs-keyword">new</span> THREE.Scene();
+
+                <span class="hljs-keyword">var</span> renderTargetParams = {
+                    minFilter: THREE.LinearFilter,
+                    magFilter: THREE.LinearFilter,
+                    format: THREE.RGBAFormat,
+                    type: THREE.FloatType
+                };
+
+                ping = <span class="hljs-keyword">new</span> THREE.WebGLRenderTarget( w, h, renderTargetParams );
+                pong = <span class="hljs-keyword">new</span> THREE.WebGLRenderTarget( w, h, renderTargetParams );
+                ping.texture.wrapS = THREE.ClampToEdgeWrapping;
+                ping.texture.wrapT = THREE.ClampToEdgeWrapping;
+                pong.texture.wrapS = THREE.ClampToEdgeWrapping;
+                pong.texture.wrapT = THREE.ClampToEdgeWrapping;
+
+                uniforms2 = {
+                    u_timer : {
+                        type: <span class="hljs-string">'i'</span>,
+                        value: <span class="hljs-number">0</span>
+                    },
+                    u_resolution : {
+                        type : <span class="hljs-string">'v2'</span>,
+                        value : <span class="hljs-keyword">new</span> THREE.Vector2()
+                    },
+                    u_mouse : {
+                        type : <span class="hljs-string">'v2'</span>,
+                        value : <span class="hljs-keyword">new</span> THREE.Vector2()
+                    },
+                    u_start : {
+                        type : <span class="hljs-string">'t'</span>,
+                        value : startText
+                    },
+                    u_texture : {
+                        type : <span class="hljs-string">'t'</span>,
+                        value : pong
+                    }
+                };
+
+                <span class="hljs-keyword">var</span> material2 = <span class="hljs-keyword">new</span> THREE.ShaderMaterial( {
+                    uniforms : uniforms2,
+                    vertexShader : <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">'vertexShader'</span> ).textContent,
+                    fragmentShader : <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">'fragmentShader2'</span> ).textContent
+                } );
+
+                <span class="hljs-keyword">var</span> geometry2 = <span class="hljs-keyword">new</span> THREE.PlaneBufferGeometry( <span class="hljs-number">2</span>, <span class="hljs-number">2</span> );
+
+                <span class="hljs-keyword">var</span> mesh2 = <span class="hljs-keyword">new</span> THREE.Mesh( geometry2, material2 );
+                scene2.add( mesh2 );
+
+                startText.needsUpdate = <span class="hljs-literal">true</span>;
+            } )();
+
+            ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupScene</span>(<span class="hljs-params"></span>)</span>{
+                renderer = <span class="hljs-keyword">new</span> THREE.WebGLRenderer( { preserveDrawingBuffer: <span class="hljs-literal">true</span> } );
+                renderer.setPixelRatio( <span class="hljs-built_in">window</span>.devicePixelRatio );
+                renderer.setClearColor( <span class="hljs-number">0x665544</span>, <span class="hljs-number">1</span> );
+                container.appendChild( renderer.domElement );
+                
+                camera = <span class="hljs-keyword">new</span> THREE.Camera();
+                camera.position.z = <span class="hljs-number">1</span>;
+                scene = <span class="hljs-keyword">new</span> THREE.Scene();
+
+                uniforms = {
+                    u_resolution : {
+                        type : <span class="hljs-string">'v2'</span>,
+                        value : <span class="hljs-keyword">new</span> THREE.Vector2( w, h )
+                    },
+                    u_texture : {
+                        type : <span class="hljs-string">'t'</span>,
+                        value : pong,
+                        minFilter : THREE.NearestFilter 
+                    }
+                };
+                <span class="hljs-keyword">var</span> material = <span class="hljs-keyword">new</span> THREE.ShaderMaterial( {
+                    uniforms : uniforms,
+                    vertexShader : <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">'vertexShader'</span> ).textContent,
+                    fragmentShader : <span class="hljs-built_in">document</span>.getElementById( <span class="hljs-string">'fragmentShader'</span> ).textContent
+                } );
+                <span class="hljs-keyword">var</span> geometry = <span class="hljs-keyword">new</span> THREE.PlaneBufferGeometry( <span class="hljs-number">2</span>, <span class="hljs-number">2</span> );
+
+                <span class="hljs-keyword">var</span> mesh = <span class="hljs-keyword">new</span> THREE.Mesh( geometry, material );
+                scene.add( mesh );
+            } )();
+        } )();
+
+        ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupEvents</span>(<span class="hljs-params"></span>)</span>{
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">updateMouse</span>(<span class="hljs-params"> canvas, evt </span>) </span>{
+                <span class="hljs-keyword">var</span> rect = canvas.getBoundingClientRect();
+                mouse.x = evt.clientX - rect.left;
+                mouse.y = evt.clientY - rect.top;
+            }
+
+            renderer.domElement.addEventListener( <span class="hljs-string">'mousemove'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> evt </span>) </span>{
+                updateMouse( renderer.domElement, evt );
+    
+                uniforms2.u_mouse.value.x = mouse.x;
+                uniforms2.u_mouse.value.y = h - mouse.y;
+            } );
+    
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onWindowResize</span>(<span class="hljs-params"> event </span>) </span>{
+                w = <span class="hljs-built_in">window</span>.innerWidth &gt; <span class="hljs-number">1200</span> ? <span class="hljs-number">1200</span> : <span class="hljs-built_in">window</span>.innerWidth;
+                renderer.setSize( w, h );
+    
+                uniforms.u_resolution.value.x = w;
+                uniforms.u_resolution.value.y = h;
+    
+                uniforms2.u_resolution.value.x = w;
+                uniforms2.u_resolution.value.y = h;
+            }
+            onWindowResize();
+            <span class="hljs-built_in">window</span>.addEventListener( <span class="hljs-string">'resize'</span>, onWindowResize, <span class="hljs-literal">false</span> );
+        } )();
+
+        ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rendering</span>(<span class="hljs-params"></span>)</span>{
+            ( <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params"></span>) </span>{
+                requestAnimationFrame( render );
+
+                stepSim();
+                stepSim();
+
+                renderer.render( scene, camera );
+
+                ++ uniforms2.u_timer.value;
+            } )();
+
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stepSim</span>(<span class="hljs-params"></span>) </span>{
+                renderer.render( scene2, camera2, ping, <span class="hljs-literal">true</span> );
+                swapBuffers();
+            }
+
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swapBuffers</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">var</span> a = pong;
+                pong = ping;
+                ping = a;
+                uniforms2.u_texture.value = pong;
+            }
+        } )();
+    } );
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://fonts.googleapis.com/css?family=Raleway:900italic"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
+
+
+<span class="hljs-comment">&lt;!-- Dependencies --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+</code></pre>
+<script>
+    (function(){
+        document.getElementById('viewCode').textContent = document.getElementById('code').innerHTML;
+    })();
+</script>
+
+<!-- Highlight.js -->
+<link rel="stylesheet" href="./Le Club _ Glitch Shader with Threejs_files/monokai-sublime.min.css">
+<script src="./Le Club _ Glitch Shader with Threejs_files/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</article>
+
+
+<footer>
+</footer>
+
+<script src="./Le Club _ Glitch Shader with Threejs_files/main.js"></script>
+<script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-73766841-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+<script src="./Le Club _ Glitch Shader with Threejs_files/livereload.js"></script></body></html>
