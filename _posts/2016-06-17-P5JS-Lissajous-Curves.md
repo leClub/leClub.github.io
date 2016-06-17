@@ -68,8 +68,8 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.23/p5.js', 'https://cd
 
             p.draw = function(){
                 for( var i = 0; i < params.n; i++ ){
-                    var x = p.width / 2 + Math.cos( (i + p.frameCount * params.n ) / 200 * params.a ) * ( p.width / 2 - 10 );
-                    var y = p.height / 2 + Math.sin( (i + p.frameCount * params.n ) / 200 * params.b ) * ( p.height / 2 - 10 );
+                    var x = p.width / 2 + Math.cos( (i + p.frameCount * params.n ) / 200 * params.a ) * ( p.width / 2 - 2 );
+                    var y = p.height / 2 + Math.sin( (i + p.frameCount * params.n ) / 200 * params.b ) * ( p.height / 2 - 2 );
                     p.point( x, y );
                 }
             };

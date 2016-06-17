@@ -50,7 +50,7 @@ deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.mi
         };
         var gui = new dat.GUI({ autoPlace: false });
 
-        document.getElementById('cnvsContainer').appendChild(gui.domElement);
+        document.getElementById('container').appendChild(gui.domElement);
 
         gui.add(params, 'xOffset', 10, 300);
         gui.add(params, 'yOffset', 2, 30);
