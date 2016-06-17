@@ -2,7 +2,7 @@
 layout: code
 title: Playing with Clipping
 image: Playing-with-Clipping.PNG
-categories: [ canvas, simplexnoise ]
+categories: [ big, canvas, simplexnoise ]
 deps: [ 'https://cdn.rawgit.com/joshforisha/fast-simplex-noise-js/master/main.js' ]
 ---
 <canvas id="render"></canvas>

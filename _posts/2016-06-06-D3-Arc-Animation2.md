@@ -2,7 +2,7 @@
 layout: code
 title: Polar Graph with D3 
 image: D3-Arc-Animation2.png
-categories: [ big, d3js ]
+categories: [ d3js ]
 deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' ]
 ---
 <div id="render"></div>

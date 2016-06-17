@@ -39,9 +39,9 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
 
             // camera
             camera = new THREE.PerspectiveCamera( 60, w / h, 1, 1000 );
-            camera.position.z = 200;
-            camera.position.y = 80;
-            camera.position.x = 80;
+            camera.position.z = 150;
+            camera.position.y = 0;
+            camera.position.x = 0;
             controls = new THREE.TrackballControls( camera, container );
             controls.rotateSpeed = 2.0;
             controls.zoomSpeed = 1.2;
@@ -77,6 +77,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
             canvas.width = canvas.height = size;
             container.appendChild( canvas );
             ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#FB3550';
             canvas.style.position = 'absolute';
             canvas.style.right = 0;
             texture = new THREE.Texture( canvas );
@@ -95,6 +96,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
             // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
             geometry = new THREE.BoxGeometry( 80, 80, 80 );
             var cube = new THREE.Mesh( geometry, material );
+            cube.rotation.set( Math.PI / 4, Math.PI / 4, 0 );
             scene.add( cube );
 
 
@@ -109,11 +111,9 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js', 'htt
         }
 
         function changeCanvas() {
+            ctx.fillRect( 0, 0, canvas.width, canvas.height );
             var t = new Date().getTime();
             var h = ( 1 + Math.sin( t / 500 ) ) * size / 2;
-            ctx.fillStyle = '#FB3550';
-            ctx.fillRect( 0, 0, canvas.width, canvas.height );
-            ctx.fillStyle = '#1E2630';
             ctx.clearRect( 0, canvas.width / 2 - h / 2, canvas.width, h );
         }
 
