@@ -6,6 +6,7 @@ layout: default
         {{ page.title }}
 
         {% assign nbCategories = page.categories.size | minus:1 %}
+        {% assign lastN = page.categories.size | minus:2 %}
 
         {% comment %}
         {% if nbCategories != 0 %}
@@ -23,7 +24,7 @@ layout: default
                 {% endif %}
 
                 <a href="#">{{ page.categories[c] }}</a>
-                {% if c < nbCategories - 1 %}
+                {% if c < lastN %}
                     ,
                 {% endif %}
             {% endfor %}

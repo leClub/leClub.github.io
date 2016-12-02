@@ -22,9 +22,9 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
 
 
     float isInRect( in vec4 rect, in vec2 st ){
-        return step( rect.x, st.x ) 
+        return step( rect.x, st.x )
             * ( 1.0 - step( rect.x + rect.z, st.x ) )
-            * step( rect.y, st.y ) 
+            * step( rect.y, st.y )
             * ( 1.0 - step( rect.y + rect.w, st.y ) );
     }
 
@@ -97,13 +97,13 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
 
         ( function init() {
             var container = document.getElementById( 'container' );
-            
+
             camera = new THREE.Camera();
             camera.position.z = 1;
             scene = new THREE.Scene();
 
             var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-            
+
             uniforms = {
                 u_resolution : {
                     type : 'v2',
@@ -112,7 +112,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
                 u_joconde : {
                     type : 't',
                     value : ( new THREE.TextureLoader() ).load( '/data/GlitchShaderTexture.png' ),
-                    minFilter : THREE.NearestFilter 
+                    minFilter : THREE.NearestFilter
                 },
                 u_rect : {
                     type : 'v4v',
@@ -135,7 +135,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
             var material = new THREE.ShaderMaterial( {
                 uniforms : uniforms,
                 vertexShader : document.getElementById( 'vertexShader' ).textContent,
-                fragmentShader : 
+                fragmentShader :
                     '#define MAX_GLITCH ' + MAX_GLITCH + '\n' +
                     document.getElementById( 'glitchFrag' ).textContent
             } );
@@ -146,7 +146,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
             renderer = new THREE.WebGLRenderer( { alpha: true } );
             renderer.setPixelRatio( window.devicePixelRatio );
             renderer.setClearColor( 0xffffff, 0 );
-            
+
             container.appendChild( renderer.domElement );
 
             function updateMouse( canvas, evt ) {
@@ -201,7 +201,7 @@ deps: [ 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js' ]
                     }
                 }
             }
-            
+
             if ( timer > 5 ) {
                 count = 0;
                 timer = 0;
