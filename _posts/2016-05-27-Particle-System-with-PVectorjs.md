@@ -143,7 +143,7 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         FlowField.prototype.update = function( time ) {
             for (var i = 0; i < this.nx; i++ ) {
                 for (var j = 0; j < this.ny; j++ ) {
-                    this.vecs[ i ][ j ].rotateTo( simplex.noise3D( i / this.scale, j / this.scale, time ) * 4 * Math.PI );
+                    this.vecs[ i ][ j ].rotateTo( simplex.in3D( i / this.scale, j / this.scale, time ) * 4 * Math.PI );
                 }
             }
         };
@@ -153,7 +153,10 @@ deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js',
         };
 
         function setup(){
-            simplex = new SimplexNoise();
+            simplex = new FastSimplexNoise( {
+                min: 0,
+                max: 1
+            } );;
             flowfield = new FlowField(50,50,40);
             particleSystem = new ParticleSystem( 10000 );
             frame = 0;
