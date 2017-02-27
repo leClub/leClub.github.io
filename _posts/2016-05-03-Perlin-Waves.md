@@ -38,7 +38,10 @@ deps: [ 'https://cdn.rawgit.com/joshforisha/fast-simplex-noise-js/359d8f78e2e224
 
         ///////////////////////////////////////////////
         // simplex-noise: https://www.npmjs.com/package/simplex-noise
-        var simplex = new SimplexNoise(),
+        var simplex = new FastSimplexNoise( {
+                min: 0,
+                max: 1
+            } ),
             t = 0;
 
         var params = {
@@ -74,7 +77,7 @@ deps: [ 'https://cdn.rawgit.com/joshforisha/fast-simplex-noise-js/359d8f78e2e224
                 context.moveTo(0, y);
                 var py = y;
                 for (var x = -100; x <= width+100; x+=params.xOffset) {
-                    var ny = y + simplex.noise3D(x / params.scaleX, y / params.scaleY, t/params.scaleT) * 40;
+                    var ny = y + simplex.in3D(x / params.scaleX, y / params.scaleY, t/params.scaleT) * 40;
                     context.bezierCurveTo(x, py, x+params.xOffset/3, ny, x+2*params.xOffset/3, ny);
                     py = ny;
                 }
