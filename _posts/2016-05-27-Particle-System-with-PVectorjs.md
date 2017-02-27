@@ -3,7 +3,7 @@ layout: code
 title: FlowField and Particle System with PVectorjs
 image: Particle-System-with-PVectorjs.png
 categories: [ js, canvas, pvectorjs ]
-deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js', 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.min.js' ]
+deps: [ 'https://cdn.rawgit.com/MAKIO135/pvectorjs/master/build/pvector.min.js', 'https://cdn.rawgit.com/joshforisha/fast-simplex-noise-js/359d8f78e2e2249fe0a76126dd32907080324a62/main.js' ]
 ---
 <canvas id="cnvs"></canvas>
 
