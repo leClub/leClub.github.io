@@ -3,7 +3,7 @@ layout: code
 title: Perlin Waves
 image: Perlin-Waves.png
 categories: [ big, js, canvas, simplexnoise ]
-deps: [ 'https://cdn.rawgit.com/jwagner/simplex-noise.js/master/simplex-noise.min.js', 'https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js' ]
+deps: [ 'https://cdn.rawgit.com/joshforisha/fast-simplex-noise-js/359d8f78e2e2249fe0a76126dd32907080324a62/main.js', 'https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js' ]
 ---
 <style>
     #container{
