@@ -3,7 +3,7 @@ layout: code
 title: Gooey Text with D3 #2
 image: D3-Gooey.PNG
 categories: [ d3js ]
-deps: [ 'https://d3js.org/d3.v3.min.js', 'https://cdn.rawgit.com/riccardoscalco/textures/master/textures.min.js' ]
+deps: [ 'https://d3js.org/d3.v3.min.js', 'https://cdn.jsdelivr.net/gh/riccardoscalco/textures/dist/textures.js' ]
 ---
 <link href='https://fonts.googleapis.com/css?family=Raleway:900italic' rel='stylesheet' type='text/css'>
 <style>
